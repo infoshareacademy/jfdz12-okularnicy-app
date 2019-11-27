@@ -1,11 +1,11 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { Button } from 'semantic-ui-react';
 
 function App() {
   return (
     <div className="App">
+<<<<<<< HEAD
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -21,6 +21,9 @@ function App() {
         </a>
       </header>
 
+=======
+      
+>>>>>>> 8e439dd5145f85150ecd5139c8521beb130787e3
     </div>
   );
 }
