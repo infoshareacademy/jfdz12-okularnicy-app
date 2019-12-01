@@ -1,49 +1,49 @@
-{
+[
     "id": 1,
     "type": "food"
-}
+]
 
-{
+[
     "id": 2,
     "type": "clothes"
-}
+]
 
-{
+[
     "id": 3,
     "type": "cosmetics"
-}
+]
 
-{
+[
     "id": 4,
     "type": "health"
-}
+]
 
-{
+[
     "id": 5,
     "type": "documents"
-}
+]
 
-{
+[
     "id": 6,
     "type": "underwear"
-}
+]
 
-{
+[
     "id": 7,
     "type": "sports equipment"
-}
+]
 
-{
+[
     "id": 8,
     "type": "jewellery"
-}
+]
 
-{
+[
     "id": 9,
     "type": "my favourite"
-}
+]
 
-{
+[
     "id": 10,
     "type": "other"
-}
+]
