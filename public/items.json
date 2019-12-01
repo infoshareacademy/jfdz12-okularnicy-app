@@ -1,4 +1,4 @@
-{
+[
     "id": 1,
     "name": "sunscreen",
     "typeId": [],
@@ -7,9 +7,9 @@
     "proTip": "Lorem",
     "img": "🧴",
     "quantity": "default"
-}
+]
 
-{
+[
     "id": 2,
     "name": "sunglasses",
     "typeId": [],
@@ -18,9 +18,9 @@
     "proTip": "Lorem",
     "img": "🕶️",
     "quantity": "default"
-}
+]
 
-{
+[
     "id": 3,
     "name": "roll of paper",
     "typeId": [],
@@ -29,9 +29,9 @@
     "proTip": "Lorem",
     "img": "🧻",
     "quantity": "default"
-}
+]
 
-{
+[
     "id": 4,
     "name": "swimsuit",
     "typeId": [],
@@ -40,9 +40,9 @@
     "proTip": "Lorem",
     "img": "👙",
     "quantity": "default"
-}
+]
 
-{
+[
     "id": 5,
     "name": "t-shirt",
     "typeId": [],
@@ -51,9 +51,9 @@
     "proTip": "Lorem",
     "img": "👕",
     "quantity": "default"
-}
+]
 
-{
+[
     "id": 6,
     "name": "socks",
     "typeId": [],
@@ -62,9 +62,9 @@
     "proTip": "Lorem",
     "img": "🧦",
     "quantity": "default"
-}
+]
 
-{
+[
     "id": 7,
     "name": "skis",
     "typeId": [],
@@ -73,9 +73,9 @@
     "proTip": "Lorem",
     "img": "🎿",
     "quantity": "default"
-}
+]
 
-{
+[
     "id": 8,
     "name": "goggles for swimming",
     "typeId": [],
@@ -84,4 +84,4 @@
     "proTip": "Lorem",
     "img": "🏊",
     "quantity": "default"
-}
+]
