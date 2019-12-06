@@ -1,39 +1,40 @@
-{
-    "id": 1,
-    "type": "cold"
-}
+[{
+        "id": 1,
+        "type": "cold"
+    }
 
-{
-    "id": 2,
-    "type": "cloudy"
-}
+    {
+        "id": 2,
+        "type": "cloudy"
+    }
 
-{
-    "id": 3,
-    "type": "foggy"
-}
+    {
+        "id": 3,
+        "type": "foggy"
+    }
 
-{
-    "id": 4,
-    "type": "sunny"
-}
+    {
+        "id": 4,
+        "type": "sunny"
+    }
 
-{
-    "id": 5,
-    "type": "wet"
-}
+    {
+        "id": 5,
+        "type": "wet"
+    }
 
-{
-    "id": 6,
-    "type": "windy"
-}
+    {
+        "id": 6,
+        "type": "windy"
+    }
 
-{
-    "id": 7,
-    "type": "stormy"
-}
+    {
+        "id": 7,
+        "type": "stormy"
+    }
 
-{
-    "id": 8,
-    "type": "heat"
-}
+    {
+        "id": 8,
+        "type": "heat"
+    }
+]
