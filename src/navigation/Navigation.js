@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
-import { Icon, Menu } from 'semantic-ui-react'
+import { Icon, Menu} from 'semantic-ui-react'
+import { Link } from 'react-router-dom';
+import UserProfile from '../user-profile/User-profile';
 
 export default class Navigation extends Component {
-  state = {}
+  state = {
+    activeItem: '',
+  }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
@@ -10,34 +14,31 @@ export default class Navigation extends Component {
     const { activeItem } = this.state
 
     return (
-      <Menu compact icon='labeled' fluid widths={3} size='mini'>
-        <Menu.Item
-          name='list'
-          active={activeItem === 'list'}
-          onClick={this.handleItemClick}
-        >
-          <Icon name='list ul' />
-          List
-        </Menu.Item>
 
-        <Menu.Item
-          name='home'
-          active={activeItem === 'home'}
-          onClick={this.handleItemClick}
+      <Menu compact icon='labeled' widths={3} size='mini' attached='top'>
+        <Link to="/user-list">
+          <Menu.Item
+            name='list'
+            active={activeItem === 'list'}
+          // onClick={this.handleItemClick}
           >
-          <Icon name='home' />
-          Homepage
+            <Icon name='list ul' />
+            My list
         </Menu.Item>
-
-        <Menu.Item
-          name='user'
-          active={activeItem === 'user'}
-          onClick={this.handleItemClick}
-        >
-          <Icon name='user circle' />
-          Your profile
+        </Link>
+        <Link to="/">
+          <Menu.Item
+            name='home'
+            active={activeItem === 'home'}
+          // onClick={this.handleItemClick}
+          >
+            <Icon name='home' />
+            Homepage
         </Menu.Item>
+        </Link>
+          <UserProfile/>
       </Menu>
+
     )
   }
 }
