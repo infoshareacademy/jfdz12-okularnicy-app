@@ -6,9 +6,10 @@
         "weather": [],
         "description": "Lorem ipsum",
         "proTip": "Lorem",
-        "img": "",
+        "img": "🧴",
         "quantity": "default"
     },
+  
     {
         "id": 2,
         "name": "sunglasses",
@@ -16,7 +17,73 @@
         "weather": [],
         "description": "Lorem ipsum",
         "proTip": "Lorem",
-        "img": "",
+        "img": "🕶️",
+        "quantity": "default"
+    },
+
+    {
+        "id": 3,
+        "name": "roll of paper",
+        "typeId": [],
+        "weather": [],
+        "description": "Lorem ipsum",
+        "proTip": "Lorem",
+        "img": "🧻",
+        "quantity": "default"
+    },
+
+    {
+        "id": 4,
+        "name": "swimsuit",
+        "typeId": [],
+        "weather": [],
+        "description": "Lorem ipsum",
+        "proTip": "Lorem",
+        "img": "👙",
+        "quantity": "default"
+    },
+
+    {
+        "id": 5,
+        "name": "t-shirt",
+        "typeId": [],
+        "weather": [],
+        "description": "Lorem ipsum",
+        "proTip": "Lorem",
+        "img": "👕",
+        "quantity": "default"
+    },
+
+    {
+        "id": 6,
+        "name": "socks",
+        "typeId": [],
+        "weather": [],
+        "description": "Lorem ipsum",
+        "proTip": "Lorem",
+        "img": "🧦",
+        "quantity": "default"
+    },
+
+    {
+        "id": 7,
+        "name": "skis",
+        "typeId": [],
+        "weather": [],
+        "description": "Lorem ipsum",
+        "proTip": "Lorem",
+        "img": "🎿",
+        "quantity": "default"
+    },
+
+    {
+        "id": 8,
+        "name": "goggles for swimming",
+        "typeId": [],
+        "weather": [],
+        "description": "Lorem ipsum",
+        "proTip": "Lorem",
+        "img": "🏊",
         "quantity": "default"
     }
 ]
