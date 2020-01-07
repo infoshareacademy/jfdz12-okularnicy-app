@@ -1,4 +1,5 @@
-[{
+[
+    {
         "id": 1,
         "name": "sunscreen",
         "typeId": [],
@@ -8,7 +9,7 @@
         "img": "🧴",
         "quantity": "default"
     },
-
+  
     {
         "id": 2,
         "name": "sunglasses",
