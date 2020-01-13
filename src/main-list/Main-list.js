@@ -1,7 +1,10 @@
 import React from 'react';
-import { Button, Image, List, Container, Segment, Loader, Dimmer } from 'semantic-ui-react';
+import { Button, Image, List, Segment, Loader, Dimmer, Form } from 'semantic-ui-react';
+import InputExampleInput from '../input/Input'
 import "./Main-list.css"
 import { Link } from 'react-router-dom';
+import SelectExample from '../select/Select';
+import RadioExampleRadioGroup from '../radio/Radio';
 
 export default class MainList extends React.Component {
     state = {
@@ -18,7 +21,6 @@ export default class MainList extends React.Component {
             .finally(() => this.setState({ loading: false }))
     }
 
-
     render() {
         if (this.state.loading) {
             return (
@@ -34,17 +36,37 @@ export default class MainList extends React.Component {
         }
         return <>
             <h1> What you need ? ;)</h1>
+
+            <Segment.Group horizontal>
+                <Segment>
+                    <InputExampleInput />
+                </Segment>
+                <Segment>
+                    <RadioExampleRadioGroup />
+                </Segment>
+                <Segment>
+                    <SelectExample />
+                </Segment>
+            </Segment.Group>
+
             <List divided>
                 {
                     this.state.items.map(item => (
                         <List.Item key={item.id}>
-                            <Link to={`/items/${item.id}`}>
-                                <List.Content>
+                            <List.Content floated='right'>
+                                <Button>Add</Button>
+                            </List.Content>
+                            <List.Content>
+                                <Link to={{
+                                    pathname: `/items/${item.id}`,
+                                    state: {
+                                        item
+                                    }
+                                }}>
                                     <List.Header>{item.img}      {item.name}</List.Header>
                                     <List.Description>{item.description}</List.Description>
-                                </List.Content>
-                            </Link>
-                            <Button floated='right'>Add</Button>
+                                </Link>
+                            </List.Content>
                         </List.Item>
                     ))
                 }
@@ -53,7 +75,6 @@ export default class MainList extends React.Component {
                         <Button fluid>Missed?</Button>
                     </Link>
                 </List.Item>
-
             </List>
         </>
     }
