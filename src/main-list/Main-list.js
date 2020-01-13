@@ -40,7 +40,6 @@ export default class MainList extends React.Component {
                         <List.Item key={item.id}>
                             <Link to={`/items/${item.id}`}>
                                 <List.Content>
-
                                     <List.Header>{item.img}      {item.name}</List.Header>
                                     <List.Description>{item.description}</List.Description>
                                 </List.Content>
