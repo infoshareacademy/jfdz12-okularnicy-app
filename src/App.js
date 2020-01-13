@@ -18,7 +18,7 @@ function App() {
   return (
     <BrowserRouter>
       <Navigation />
-      <Container text>
+      <Container text style={{marginTop: '78px'}}>
         <Switch>
           <Route
             path="/user-list"
