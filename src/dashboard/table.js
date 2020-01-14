@@ -5,8 +5,8 @@ const TableExampleCollapsing = () => (
   <Table basic='very' celled collapsing>
     <Table.Header>
       <Table.Row>
-        <Table.HeaderCell>Employee</Table.HeaderCell>
-        <Table.HeaderCell>Correct Guesses</Table.HeaderCell>
+        <Table.HeaderCell>Things To Pack</Table.HeaderCell>
+        <Table.HeaderCell>Remained</Table.HeaderCell>
       </Table.Row>
     </Table.Header>
 
@@ -16,8 +16,8 @@ const TableExampleCollapsing = () => (
           <Header as='h4' image>
             <Image src='/images/avatar/small/lena.png' rounded size='mini' />
             <Header.Content>
-              Lena
-              <Header.Subheader>Human Resources</Header.Subheader>
+              Glasses
+              {/* <Header.Subheader>Human Resources</Header.Subheader> */}
             </Header.Content>
           </Header>
         </Table.Cell>
@@ -28,8 +28,8 @@ const TableExampleCollapsing = () => (
           <Header as='h4' image>
             <Image src='/images/avatar/small/matthew.png' rounded size='mini' />
             <Header.Content>
-              Matthew
-              <Header.Subheader>Fabric Design</Header.Subheader>
+              Wallet
+              
             </Header.Content>
           </Header>
         </Table.Cell>
@@ -40,8 +40,8 @@ const TableExampleCollapsing = () => (
           <Header as='h4' image>
             <Image src='/images/avatar/small/lindsay.png' rounded size='mini' />
             <Header.Content>
-              Lindsay
-              <Header.Subheader>Entertainment</Header.Subheader>
+              Shoes
+              
             </Header.Content>
           </Header>
         </Table.Cell>
@@ -52,8 +52,8 @@ const TableExampleCollapsing = () => (
           <Header as='h4' image>
             <Image src='/images/avatar/small/mark.png' rounded size='mini' />
             <Header.Content>
-              Mark
-              <Header.Subheader>Executive</Header.Subheader>
+              Passport
+              
             </Header.Content>
           </Header>
         </Table.Cell>

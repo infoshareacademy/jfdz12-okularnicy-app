@@ -7,6 +7,7 @@ import ImageExampleLink from './image';
 import Chart from './PieChart'
 
 
+
 export default function Dashboard (){
     return (
         <div>
@@ -44,7 +45,8 @@ export default function Dashboard (){
                             display: 'flex',
                             justifyContent: 'end',
                         }}
-                        /></Segment>
+                        />
+                    </Segment>
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
