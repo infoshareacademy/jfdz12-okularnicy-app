@@ -24,6 +24,8 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+    <script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-analytics.js"></script>  
     <title>React App</title>
   </head>
   <body>
@@ -39,5 +41,27 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+
+
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCZXhm3zcG9vYBUhqKicIHKrcf1teHS4uM",
+    authDomain: "okularnicy-app.firebaseapp.com",
+    databaseURL: "https://okularnicy-app.firebaseio.com",
+    projectId: "okularnicy-app",
+    storageBucket: "okularnicy-app.appspot.com",
+    messagingSenderId: "91894787110",
+    appId: "1:91894787110:web:51e75bb16c6c56a0b5cae7",
+    measurementId: "G-TQ02ZKRZB4"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+  const db = firebase firestore();
+  db.settings({ timestampInSnapshots: true});
+
+</script>
   </body>
 </html>
