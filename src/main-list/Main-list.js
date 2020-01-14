@@ -38,7 +38,11 @@ export default class MainList extends React.Component {
                 {
                     this.state.items.map(item => (
                         <List.Item key={item.id}>
-                            <Link to={`/items/${item.id}`}>
+                            <Link to={{
+                                pathname: `/items/${item.id}`,
+                                state: {
+                                    item
+                                }}}>
                                 <List.Content>
 
                                     <List.Header>{item.img}      {item.name}</List.Header>

@@ -15,7 +15,7 @@ export default class Navigation extends Component {
 
     return (
 
-      <Menu compact icon='labeled' widths={3} size='mini' attached='top'>
+      <Menu icon='labeled' widths={3} size='mini' fixed='top'>
         <Link to="/user-list">
           <Menu.Item
             name='list'
