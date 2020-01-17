@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Form, Radio } from 'semantic-ui-react'
+import './Radio.css'
 
 export default class RadioExampleRadioGroup extends Component {
     state = {}
@@ -7,39 +8,36 @@ export default class RadioExampleRadioGroup extends Component {
 
     render() {
         return (
-            <>
-                <Form.Field>
-                    <Radio
-                        label='Choose this'
-                        name='radioGroup'
-                        value='this'
-                        checked={this.state.value === 'this'}
-                        onChange={this.handleChange}
-                    />
-                    <Radio
-                        label='Or that'
-                        name='radioGroup'
-                        value='that'
-                        checked={this.state.value === 'that'}
-                        onChange={this.handleChange}
-                    />
-                    <br />
-                    <Radio
-                        label='Choose thisyui'
-                        name='radioGroup'
-                        value='this'
-                        checked={this.state.value === 'this'}
-                        onChange={this.handleChange}
-                    />
-                    <Radio
-                        label='Or that ytuy'
-                        name='radioGroup'
-                        value='that'
-                        checked={this.state.value === 'that'}
-                        onChange={this.handleChange}
-                    />
-                </Form.Field>
-            </>
+            <Form.Field className="radio">
+                <Radio className="radioItem"
+                    label='Sunny'
+                    name='radioGroup'
+                    value='sunny'
+                    checked={this.state.value === 'sunny'}
+                    onChange={this.handleChange}
+                />
+                <Radio className="radioItem"
+                    label='Cold'
+                    name='radioGroup'
+                    value='cold'
+                    checked={this.state.value === 'cold'}
+                    onChange={this.handleChange}
+                />
+                <Radio className="radioItem"
+                    label='Windy'
+                    name='radioGroup'
+                    value='windy'
+                    checked={this.state.value === 'windy'}
+                    onChange={this.handleChange}
+                />
+                <Radio className="radioItem"
+                    label='Stormy'
+                    name='radioGroup'
+                    value='stormy'
+                    checked={this.state.value === 'stormy'}
+                    onChange={this.handleChange}
+                />
+            </Form.Field>
         )
     }
 }

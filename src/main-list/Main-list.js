@@ -41,6 +41,7 @@ export default class MainList extends React.Component {
     }
 
     handleTypeChange = (e) => {
+        console.log(this.typeFilter)
         this.setState({
             typeFilter: e.target.value,
         });
@@ -48,8 +49,7 @@ export default class MainList extends React.Component {
 
     fetchItems() {
         this.setState({
-            loading: false,
-            hasError: false,
+            loading: true,
             error: '',
         }, () => {
             setTimeout(() => {
@@ -66,11 +66,10 @@ export default class MainList extends React.Component {
                     })
                     .catch((error) => {
                         this.setState({
-                            hasError: true,
                             error: error.toString(),
                         });
                     });
-            }, 1);
+            }, 1200);
         });
     }
 
@@ -91,19 +90,20 @@ export default class MainList extends React.Component {
         return <>
             <h1> What you need ? ;)</h1>
 
-            <Segment.Group horizontal>
-                <Segment>
+            <Segment.Group horizontal className="filters">
+                <Segment className="filter">
                     <ItemSearchInput
                         value={this.state.search}
-                        onChange={this.handleSearchChange} placeholder='Search...' />
+                        onChange={this.handleSearchChange} />
                 </Segment>
-                <Segment>
+                <Segment className="filter">
                     <RadioExampleRadioGroup
-                        value={this.state.search}
-                        onChange={this.handleTypeChange} />
+                    />
                 </Segment>
-                <Segment>
-                    <SelectExample />
+                <Segment className="filter">
+                    <SelectExample
+                        value={this.state.typeFilter}
+                        onChange={this.handleTypeChange} />
                 </Segment>
             </Segment.Group>
 

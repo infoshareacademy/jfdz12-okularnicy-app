@@ -3,7 +3,12 @@ h1{
 }
 
 .filters {
-    display: flex !important;
+    display: flex;
     flex-wrap: wrap;
-    align-content: stretch;
+    align-items: center;
+    text-align: center;
+}
+
+.filter {
+    padding: 10px !important;
 }

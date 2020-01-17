@@ -3,7 +3,9 @@ import { Input } from 'semantic-ui-react'
 
 export function ItemSearchInput(props) {
     return (
-        <Input value={props.value} onChange={props.onChange} />
-
+        <Input
+            placeholder='Search...'
+            value={props.value}
+            onChange={props.onChange} />
     );
 }

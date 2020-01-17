@@ -1,50 +1,42 @@
-[{
-        "id": 1,
-        "type": "food"
-    },
-
+[
     {
-        "id": 2,
-        "type": "clothes"
+        "key": 1,
+        "value": "food"
     },
-
     {
-        "id": 3,
-        "type": "cosmetics"
+        "key": 2,
+        "value": "clothes"
     },
-
     {
-        "id": 4,
-        "type": "health"
+        "key": 3,
+        "value": "cosmetics"
     },
-
     {
-        "id": 5,
-        "type": "documents"
+        "key": 4,
+        "value": "health"
     },
-
     {
-        "id": 6,
-        "type": "underwear"
+        "key": 5,
+        "value": "documents"
     },
-
     {
-        "id": 7,
-        "type": "sports equipment"
+        "key": 6,
+        "value": "underwear"
     },
-
     {
-        "id": 8,
-        "type": "jewellery"
+        "key": 7,
+        "value": "sports equipment"
     },
-
     {
-        "id": 9,
-        "type": "my favourite"
+        "key": 8,
+        "value": "jewellery"
     },
-
     {
-        "id": 10,
-        "type": "other"
+        "key": 9,
+        "value": "my favourite"
+    },
+    {
+        "key": 10,
+        "value": "other"
     }
 ]

@@ -1,7 +1,7 @@
 export function getItems({
     search = '',
     // type
-    filter = 'all',
+    typeFilter = 'all',
     //kategory
     sortBy = 'name',
 
@@ -12,10 +12,10 @@ export function getItems({
             const filteredItems = data
                 .filter(
                     item => {
-                        if (filter === 'all') {
+                        if (typeFilter === 'all') {
                             return true;
                         }
-                        return item.type === filter;
+                        return item.typeId === typeFilter;
                     },
                 )
                 .filter(
@@ -28,9 +28,9 @@ export function getItems({
                 )
                 .filter(
                     item => {
-                        if (filter === 'all') return true;
+                        if (typeFilter === 'all') return true;
 
-                        return item.type === filter;
+                        return item.type === typeFilter;
                     }
                 )
 
