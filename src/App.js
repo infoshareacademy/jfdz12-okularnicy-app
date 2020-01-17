@@ -7,6 +7,7 @@ import MainList from './main-list/Main-list';
 import Dashboard from './dashboard/Dashboard';
 import ItemDetails from './item-details/Item-details';
 import UserList from './user-list/User-list';
+import {AuthContext}   from './auth/Auth';
 
 const styleLink = document.createElement("link");
 styleLink.rel = "stylesheet";
@@ -16,6 +17,7 @@ document.head.appendChild(styleLink);
 
 function App() {
   return (
+    <AuthContext>
     <BrowserRouter>
       <Navigation />
       <Container text style={{marginTop: '78px'}}>
@@ -42,6 +44,7 @@ function App() {
         </Switch>
       </Container>
     </BrowserRouter>
+    </AuthContext>
   );
 }
 
