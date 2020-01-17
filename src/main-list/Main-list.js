@@ -1,25 +1,79 @@
 import React from 'react';
 import { Button, Image, List, Segment, Loader, Dimmer, Form } from 'semantic-ui-react';
-import InputExampleInput from '../input/Input'
+import { ItemSearchInput } from '../input/Input'
 import "./Main-list.css"
 import { Link } from 'react-router-dom';
 import SelectExample from '../select/Select';
 import RadioExampleRadioGroup from '../radio/Radio';
+import { getItems } from '../api/items';
 
 export default class MainList extends React.Component {
     state = {
+        typeFilter: 'all',
+        search: '',
+        sortBy: 'name',
         items: [],
         loading: true,
         error: null
     }
 
     componentDidMount() {
-        fetch("items.json")
-            .then(response => response.json())
-            .then(data => this.setState({ items: data }))
-            .catch(err => this.setState({ error: err }))
-            .finally(() => this.setState({ loading: false }))
+        this.fetchItems()
     }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        const filtersChanged = prevState.typeFilter !== this.state.typeFilter;
+        const searchChanged = prevState.search !== this.state.search;
+        const sortByChanged = prevState.sortBy !== this.state.sortBy;
+        if (
+            (
+                filtersChanged || searchChanged || sortByChanged
+            ) && !this.state.isLoading
+        ) {
+            this.fetchItems();
+        }
+    }
+
+    handleSearchChange = (e) => {
+        this.setState({
+            search: e.target.value.toLowerCase(),
+        });
+    }
+
+    handleTypeChange = (e) => {
+        this.setState({
+            typeFilter: e.target.value,
+        });
+    }
+
+    fetchItems() {
+        this.setState({
+            loading: false,
+            hasError: false,
+            error: '',
+        }, () => {
+            setTimeout(() => {
+                getItems({
+                    search: this.state.search,
+                    filter: this.state.typeFilter,
+                    sortBy: this.state.sortBy,
+                })
+                    .then(data => {
+                        this.setState({
+                            items: data,
+                            loading: false,
+                        });
+                    })
+                    .catch((error) => {
+                        this.setState({
+                            hasError: true,
+                            error: error.toString(),
+                        });
+                    });
+            }, 1);
+        });
+    }
+
 
     render() {
         if (this.state.loading) {
@@ -39,10 +93,14 @@ export default class MainList extends React.Component {
 
             <Segment.Group horizontal>
                 <Segment>
-                    <InputExampleInput />
+                    <ItemSearchInput
+                        value={this.state.search}
+                        onChange={this.handleSearchChange} placeholder='Search...' />
                 </Segment>
                 <Segment>
-                    <RadioExampleRadioGroup />
+                    <RadioExampleRadioGroup
+                        value={this.state.search}
+                        onChange={this.handleTypeChange} />
                 </Segment>
                 <Segment>
                     <SelectExample />
@@ -64,7 +122,7 @@ export default class MainList extends React.Component {
                                     }
                                 }}>
                                     <List.Header>{item.img}      {item.name}</List.Header>
-                                    <List.Description>{item.description}</List.Description>
+                                    <List.Description>{item.description}{String(item.type)}</List.Description>
                                 </Link>
                             </List.Content>
                         </List.Item>
