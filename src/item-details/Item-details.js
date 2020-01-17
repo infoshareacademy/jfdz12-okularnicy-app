@@ -1,10 +1,9 @@
 import React from 'react'
-import { Item} from 'semantic-ui-react'
+import { Item } from 'semantic-ui-react'
 import { AddToList } from '../user-list/AddToList'
 
 export default function ItemDetails(props) {
     const { item } = props.location.state
-    console.log ('props ItemDetails', props )
     return (
         <Item.Group relaxed>
             <Item>
@@ -16,7 +15,7 @@ export default function ItemDetails(props) {
                     </Item.Meta>
                     <Item.Description>Tip: {item.proTip}</Item.Description>
                     <Item.Extra>
-                        <AddToList itemId={item.id}/>
+                        <AddToList itemId={item.id} />
                     </Item.Extra>
                 </Item.Content>
             </Item>

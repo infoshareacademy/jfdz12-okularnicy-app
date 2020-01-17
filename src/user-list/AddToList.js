@@ -4,7 +4,6 @@ import { MyContext } from '../auth/Auth'
 
 export function AddToList(props) {
     const userList = useContext(MyContext)
-
     function findItem(itemId) { return (userList.state.userList.indexOf(itemId)) }
     return (
         <>
@@ -14,7 +13,7 @@ export function AddToList(props) {
             )
                 : (
                     <Button itemId={props.itemId} color='green' floated='right' onClick={(e) => userList.addToList(props.itemId)}>
-                        Add to list<Icon name='right plus' />
+                        Add<Icon name='right plus' />
                     </Button>)
             }
 
