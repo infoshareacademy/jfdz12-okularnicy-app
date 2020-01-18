@@ -25,8 +25,10 @@ export default class UserList extends React.Component {
     filterItems() {
         const userListObjects = []
         this.state.items.map((item) => {
+            console.log (this.context.state.userList)
             if (this.context.state.userList.includes(item.id)) {
                 userListObjects.push(item)
+                return null
             }
 
         })
@@ -67,7 +69,7 @@ export default class UserList extends React.Component {
                                 </List.Content>
                             </Link>
                             <List.Content floated='right'>
-                            <AddToList itemId={item.id} />
+                            <AddToList itemId={item.id} iconic={true} />
                             </List.Content>
                         </List.Item>
                     )

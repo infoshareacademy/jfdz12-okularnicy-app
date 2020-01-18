@@ -27,6 +27,20 @@ export class AuthContext extends React.Component {
         })
     }
 
+    componentDidMount() {
+        this.userData = JSON.parse(localStorage.getItem('userList'));
+
+        if (localStorage.getItem('userList')) {
+            this.setState({
+                userList: this.userData,
+            })
+        }
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        localStorage.setItem('userList', JSON.stringify(nextState));
+    }
+
     render() {
         return (
             <MyContext.Provider value={{

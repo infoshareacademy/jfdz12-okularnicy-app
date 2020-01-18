@@ -50,7 +50,7 @@ export default class MainList extends React.Component {
                                     <List.Description>{item.description}</List.Description>
                                 </List.Content>
                             </Link>
-                            <AddToList itemId={item.id} />
+                            <AddToList itemId={item.id} iconic={true} />
                         </List.Item>
                     ))
                 }
