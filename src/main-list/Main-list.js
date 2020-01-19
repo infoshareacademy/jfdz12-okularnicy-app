@@ -1,7 +1,8 @@
 import React from 'react';
-import { Button, Image, List, Container, Segment, Loader, Dimmer } from 'semantic-ui-react';
+import { Button, Image, List, Segment, Loader, Dimmer } from 'semantic-ui-react';
 import "./Main-list.css"
 import { Link } from 'react-router-dom';
+import { AddToList } from '../user-list/AddToList';
 
 export default class MainList extends React.Component {
     state = {
@@ -49,7 +50,7 @@ export default class MainList extends React.Component {
                                     <List.Description>{item.description}</List.Description>
                                 </List.Content>
                             </Link>
-                            <Button floated='right'>Add</Button>
+                            <AddToList itemId={item.id} iconic={true} />
                         </List.Item>
                     ))
                 }
