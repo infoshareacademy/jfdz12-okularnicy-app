@@ -26,7 +26,7 @@ function App() {
             path="/user-list"
             component={UserList}
           />
-
+        
           <Route
             path="/dashboard"
             component={Dashboard}
@@ -42,7 +42,7 @@ function App() {
           />
           <Redirect to="/" />
         </Switch>
-      </Container>
+        </Container>
     </BrowserRouter>
     </AuthContext>
   );

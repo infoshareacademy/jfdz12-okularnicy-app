@@ -11,7 +11,7 @@ import Chart from './PieChart'
 export default function Dashboard (){
     return (
         <div style={{
-            backgroundColor: 'ff0007',
+            marginTop: '70px'
         }}>
         <Grid stackable columns={3} divided>
             <Grid.Row stretched>

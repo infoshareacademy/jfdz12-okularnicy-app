@@ -14,86 +14,84 @@ const TableExampleCollapsing = () => (
       <Table.Row>
         <Table.Cell>
           <Header as='h4' image>
-            <Image src='/images/avatar/small/lena.png' rounded size='mini' />
+            <Image src='./itemImg/sunglasses.jpg' rounded size='mini' />
             <Header.Content>
               Glasses
               {/* <Header.Subheader>Human Resources</Header.Subheader> */}
             </Header.Content>
           </Header>
         </Table.Cell>
-        <Table.Cell>22</Table.Cell>
+        <Table.Cell>1</Table.Cell>
       </Table.Row>
       <Table.Row>
         <Table.Cell>
           <Header as='h4' image>
-            <Image src='/images/avatar/small/matthew.png' rounded size='mini' />
+            <Image src='./itemImg/tshirt.jpg' rounded size='mini' />
             <Header.Content>
-              Wallet
+              T-shirt
               
             </Header.Content>
           </Header>
         </Table.Cell>
-        <Table.Cell>15</Table.Cell>
+        <Table.Cell>5</Table.Cell>
       </Table.Row>
       <Table.Row>
         <Table.Cell>
           <Header as='h4' image>
-            <Image src='/images/avatar/small/lindsay.png' rounded size='mini' />
+            <Image src='./itemImg/sunscreen.jpg' rounded size='mini' />
             <Header.Content>
-              Shoes
+              Sunscreen
               
             </Header.Content>
           </Header>
         </Table.Cell>
-        <Table.Cell>12</Table.Cell>
+        <Table.Cell>1</Table.Cell>
       </Table.Row>
       <Table.Row>
         <Table.Cell>
           <Header as='h4' image>
-            <Image src='/images/avatar/small/mark.png' rounded size='mini' />
+            <Image src='./itemImg/goggles.jpg' rounded size='mini' />
             <Header.Content>
-              Passport
+              Goggles
               
             </Header.Content>
           </Header>
         </Table.Cell>
-        <Table.Cell>11</Table.Cell>
+        <Table.Cell>2</Table.Cell>
       </Table.Row>
       <Table.Row>
         <Table.Cell>
           <Header as='h4' image>
-            <Image src='/images/avatar/small/lena.png' rounded size='mini' />
+            <Image src='./itemImg/swimsuit.jpeg' rounded size='mini' />
             <Header.Content>
-              Glasses
-              {/* <Header.Subheader>Human Resources</Header.Subheader> */}
+             Swimsuit
             </Header.Content>
           </Header>
         </Table.Cell>
-        <Table.Cell>22</Table.Cell>
+        <Table.Cell>4</Table.Cell>
       </Table.Row>
       <Table.Row>
         <Table.Cell>
           <Header as='h4' image>
-            <Image src='/images/avatar/small/lena.png' rounded size='mini' />
+            <Image src='./itemImg/socks.jpeg' rounded size='mini' />
             <Header.Content>
-              Glasses
+              Socks
               {/* <Header.Subheader>Human Resources</Header.Subheader> */}
             </Header.Content>
           </Header>
         </Table.Cell>
-        <Table.Cell>22</Table.Cell>
+        <Table.Cell>6</Table.Cell>
       </Table.Row>
       <Table.Row>
         <Table.Cell>
           <Header as='h4' image>
-            <Image src='/images/avatar/small/lena.png' rounded size='mini' />
+            <Image src='./itemImg/skiis.jpeg' rounded size='mini' />
             <Header.Content>
-              Glasses
-              {/* <Header.Subheader>Human Resources</Header.Subheader> */}
+              Skiis
             </Header.Content>
           </Header>
         </Table.Cell>
-        <Table.Cell>22</Table.Cell>
+        <Table.Cell>1</Table.Cell>
       </Table.Row>
     </Table.Body>
   </Table>
