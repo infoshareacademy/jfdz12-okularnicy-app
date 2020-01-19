@@ -1,11 +1,15 @@
 import React from 'react';
-import { Button, Image, List, Segment, Loader, Dimmer } from 'semantic-ui-react';
-import { ItemSearchInput } from '../input/Input'
-import "./Main-list.css"
 import { Link } from 'react-router-dom';
+import { Button, Image, List, Segment, Loader, Dimmer } from 'semantic-ui-react';
+
 import SelectType from '../select/Select';
+import { ItemSearchInput } from '../input/Input'
 import { RadioSelect } from '../radio/Radio';
 import { getItems } from '../api/items';
+import { AddToList } from '../user-list/AddToList';
+
+import "./Main-list.css"
+
 
 export default class MainList extends React.Component {
     state = {
@@ -116,7 +120,7 @@ export default class MainList extends React.Component {
                     this.state.items.map(item => (
                         <List.Item key={item.id}>
                             <List.Content floated='right'>
-                                <Button>Add</Button>
+                                <AddToList itemId={item.id} iconic={true} />
                             </List.Content>
                             <List.Content>
                                 <Link to={{
