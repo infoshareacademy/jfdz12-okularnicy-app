@@ -2,7 +2,7 @@ import React from 'react'
 import { Icon, Image, Statistic } from 'semantic-ui-react'
 
 const StatisticExample = () => (
-  <Statistic.Group>
+  <Statistic.Group size={'large'}>
     <Statistic>
       <Statistic.Value>22</Statistic.Value>
       <Statistic.Label>Saves</Statistic.Label>

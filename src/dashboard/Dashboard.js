@@ -2,7 +2,7 @@ import React from 'react';
 import TableExampleCollapsing from './table';
 import StatisticExample from './Statistic';
 import TableExamplePadded from'./coments';
-import { Grid, Segment } from 'semantic-ui-react'
+import { Grid, Image, Segment } from 'semantic-ui-react'
 import ImageExampleLink from './image';
 import Chart from './PieChart'
 
@@ -10,15 +10,15 @@ import Chart from './PieChart'
 
 export default function Dashboard (){
     return (
-        <div>
-        
-            <Grid columns={3} divided>
+        <div style={{
+            backgroundColor: 'ff0007',
+        }}>
+        <Grid stackable columns={3} divided>
             <Grid.Row stretched>
-                <Grid.Column>
-                <Segment style={{
-                            margin: 'auto',
-                            
-                        }}><ImageExampleLink /> </Segment>
+                <Grid.Column textAlign={'center'}>
+                <Segment>
+                    <ImageExampleLink /> 
+                </Segment>
                 </Grid.Column>
                 <Grid.Column>
                 <Segment>
@@ -32,28 +32,24 @@ export default function Dashboard (){
                     </h3>
                 </Segment>
                 </Grid.Column>
-                <Grid.Column>
+                <Grid.Column textAlign={'left'}>
                 <Segment><TableExampleCollapsing /></Segment>
                 </Grid.Column>
             </Grid.Row>
             </Grid> 
-            <Grid columns={1}>
-                <Grid.Row stretched>
+            <Grid textAlign={'center'} columns={2}>
+                <Grid.Row>
                     <Grid.Column>
-                        <Segment ><StatisticExample 
-                        style={{
-                            display: 'flex',
-                            justifyContent: 'end',
-                        }}
-                        />
-                    </Segment>
+                        <Segment  >
+                            <StatisticExample/>
+                        </Segment>
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
             <Grid columns={1}>
                 <Grid.Row stretched>
-                    <Grid.Column>
-                        <Segment><TableExamplePadded/></Segment>
+                    <Grid.Column textAlign={'center'}>
+                        <Segment><TableExamplePadded style={{marginLeft: '50px'}} /></Segment>
                     </Grid.Column>
                 </Grid.Row>
             </Grid>

@@ -59,6 +59,42 @@ const TableExampleCollapsing = () => (
         </Table.Cell>
         <Table.Cell>11</Table.Cell>
       </Table.Row>
+      <Table.Row>
+        <Table.Cell>
+          <Header as='h4' image>
+            <Image src='/images/avatar/small/lena.png' rounded size='mini' />
+            <Header.Content>
+              Glasses
+              {/* <Header.Subheader>Human Resources</Header.Subheader> */}
+            </Header.Content>
+          </Header>
+        </Table.Cell>
+        <Table.Cell>22</Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>
+          <Header as='h4' image>
+            <Image src='/images/avatar/small/lena.png' rounded size='mini' />
+            <Header.Content>
+              Glasses
+              {/* <Header.Subheader>Human Resources</Header.Subheader> */}
+            </Header.Content>
+          </Header>
+        </Table.Cell>
+        <Table.Cell>22</Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>
+          <Header as='h4' image>
+            <Image src='/images/avatar/small/lena.png' rounded size='mini' />
+            <Header.Content>
+              Glasses
+              {/* <Header.Subheader>Human Resources</Header.Subheader> */}
+            </Header.Content>
+          </Header>
+        </Table.Cell>
+        <Table.Cell>22</Table.Cell>
+      </Table.Row>
     </Table.Body>
   </Table>
 )
