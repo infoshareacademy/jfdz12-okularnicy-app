@@ -4,8 +4,7 @@
         "name": "sunscreen",
         "typeId": 3,
         "weather": [
-            4,
-            8
+            1
         ],
         "description": "For your face and body sunlight protection",
         "proTip": "Every day use. Remember sun shines also in the winter",
@@ -18,8 +17,7 @@
         "name": "sunglasses",
         "typeId": 7,
         "weather": [
-            4,
-            8
+            1
         ],
         "description": "Protect your eyes from sunshines",
         "proTip": "Works also at the day after",
@@ -32,7 +30,10 @@
         "name": "roll of paper",
         "typeId": 4,
         "weather": [
-            9
+            1,
+            2,
+            3,
+            4
         ],
         "description": "You can make mummies out of it",
         "proTip": "Great for runny nose",
@@ -45,9 +46,8 @@
         "name": "swimsuit",
         "typeId": 7,
         "weather": [
-            4,
-            8,
-            5
+            1,
+            4
         ],
         "description": "Usefull in water",
         "proTip": "Can be helpful if you are going to sunbathe",
@@ -60,7 +60,10 @@
         "name": "t-shirt",
         "typeId": 2,
         "weather": [
-            9
+            1,
+            2,
+            3,
+            4
         ],
         "description": "Mainly for dressing",
         "proTip": "Wear it on top of long sleeve to demonstrate your style",
@@ -73,7 +76,10 @@
         "name": "socks",
         "typeId": 2,
         "weather": [
-            9
+            1,
+            2,
+            3,
+            4
         ],
         "description": "Makes your feet comfy",
         "proTip": "They do not have to match",
@@ -86,7 +92,7 @@
         "name": "skis",
         "typeId": 7,
         "weather": [
-            1
+            2
         ],
         "description": "Mainy winter sport",
         "proTip": "Have you tried snowboard?",
@@ -99,7 +105,8 @@
         "name": "goggles for swimming",
         "typeId": 7,
         "weather": [
-            9
+            4,
+            3
         ],
         "description": "Better get them",
         "proTip": "Makes you see under the water",

@@ -1,22 +1,83 @@
 import React from 'react';
-import { Button, Image, List, Segment, Loader, Dimmer } from 'semantic-ui-react';
-import "./Main-list.css"
 import { Link } from 'react-router-dom';
+import { Button, Image, List, Segment, Loader, Dimmer } from 'semantic-ui-react';
+
+import SelectType from '../select/Select';
+import { ItemSearchInput } from '../input/Input'
+import { RadioSelect } from '../radio/Radio';
+import { getItems } from '../api/items';
 import { AddToList } from '../user-list/AddToList';
+
+import "./Main-list.css"
+
 
 export default class MainList extends React.Component {
     state = {
+        typeFilter: 11,
+        search: '',
+        sortBy: '',
         items: [],
         loading: true,
         error: null
     }
 
     componentDidMount() {
-        fetch("items.json")
-            .then(response => response.json())
-            .then(data => this.setState({ items: data }))
-            .catch(err => this.setState({ error: err }))
-            .finally(() => this.setState({ loading: false }))
+        this.fetchItems()
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        const filtersChanged = prevState.typeFilter !== this.state.typeFilter;
+        const searchChanged = prevState.search !== this.state.search;
+        const sortByChanged = prevState.sortBy !== this.state.sortBy;
+        if (
+            (
+                filtersChanged || searchChanged || sortByChanged
+            ) && !this.state.isLoading
+        ) {
+            this.fetchItems();
+        }
+    }
+
+    handleSearchChange = (e) => {
+        this.setState({
+            search: e.target.value.toLowerCase(),
+        });
+    }
+
+    handleTypeChange = (e, data) => {
+        this.setState({
+            typeFilter: data.value,
+        })
+    }
+
+    handleRadioChange = (e, data) => {
+        this.setState({
+            sortBy: data.value,
+        })
+    }
+
+    fetchItems() {
+        this.setState({
+            loading: true,
+            error: '',
+        }, () => {
+            getItems({
+                search: this.state.search,
+                typeFilter: this.state.typeFilter,
+                sortBy: this.state.sortBy,
+            })
+                .then(data => {
+                    this.setState({
+                        items: data,
+                        loading: false,
+                    });
+                })
+                .catch((error) => {
+                    this.setState({
+                        error: error.toString(),
+                    });
+                });
+        });
     }
 
 
@@ -35,22 +96,43 @@ export default class MainList extends React.Component {
         }
         return <>
             <h1> What you need ? ;)</h1>
+
+            <Segment.Group horizontal className="filters">
+                <Segment className="filter">
+                    <ItemSearchInput
+                        value={this.state.search}
+                        onChange={this.handleSearchChange} />
+                </Segment>
+                <Segment className="filter">
+                    <RadioSelect
+                        value={this.state.sortBy}
+                        onChange={this.handleRadioChange}
+                    />
+                </Segment>
+                <Segment className="filter">
+                    <SelectType
+                        value={this.state.typeFilter}
+                        onChange={this.handleTypeChange} />
+                </Segment>
+            </Segment.Group>
             <List divided>
                 {
                     this.state.items.map(item => (
                         <List.Item key={item.id}>
-                            <Link to={{
-                                pathname: `/items/${item.id}`,
-                                state: {
-                                    item
-                                }}}>
-                                <List.Content>
-
-                                    <List.Header>{item.img}      {item.name}</List.Header>
+                            <List.Content floated='right'>
+                                <AddToList itemId={item.id} iconic={true} />
+                            </List.Content>
+                            <List.Content>
+                                <Link to={{
+                                    pathname: `/items/${item.id}`,
+                                    state: {
+                                        item
+                                    }
+                                }}>
+                                    <List.Header>{item.img}{item.name}</List.Header>
                                     <List.Description>{item.description}</List.Description>
-                                </List.Content>
-                            </Link>
-                            <AddToList itemId={item.id} iconic={true} />
+                                </Link>
+                            </List.Content>
                         </List.Item>
                     ))
                 }
@@ -59,7 +141,6 @@ export default class MainList extends React.Component {
                         <Button fluid>Missed?</Button>
                     </Link>
                 </List.Item>
-
             </List>
         </>
     }
