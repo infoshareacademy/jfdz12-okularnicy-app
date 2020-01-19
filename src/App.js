@@ -26,7 +26,6 @@ function App() {
             path="/user-list"
             component={UserList}
           />
-        
           <Route
             path="/dashboard"
             component={Dashboard}
