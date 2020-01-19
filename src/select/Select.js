@@ -60,8 +60,8 @@ const typeOptions =
         }
     ]
 
-function SelectExample(props) {
+function SelectType(props) {
     return (<Select placeholder='Type' onChange={props.onChange} options={typeOptions} />)
 }
 
-export default SelectExample
+export default SelectType

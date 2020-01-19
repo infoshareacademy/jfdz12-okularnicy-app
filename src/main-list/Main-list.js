@@ -1,17 +1,17 @@
 import React from 'react';
-import { Button, Image, List, Segment, Loader, Dimmer, Form } from 'semantic-ui-react';
+import { Button, Image, List, Segment, Loader, Dimmer } from 'semantic-ui-react';
 import { ItemSearchInput } from '../input/Input'
 import "./Main-list.css"
 import { Link } from 'react-router-dom';
-import SelectExample from '../select/Select';
-import RadioExampleRadioGroup from '../radio/Radio';
+import SelectType from '../select/Select';
+import { RadioSelect } from '../radio/Radio';
 import { getItems } from '../api/items';
 
 export default class MainList extends React.Component {
     state = {
-        typeFilter: 'all',
+        typeFilter: 11,
         search: '',
-        sortBy: 'name',
+        sortBy: '',
         items: [],
         loading: true,
         error: null
@@ -40,11 +40,16 @@ export default class MainList extends React.Component {
         });
     }
 
-    handleTypeChange = (e) => {
-        console.log(this.typeFilter)
+    handleTypeChange = (e, data) => {
         this.setState({
-            typeFilter: e.target.value,
-        });
+            typeFilter: data.value,
+        })
+    }
+
+    handleRadioChange = (e, data) => {
+        this.setState({
+            sortBy: data.value,
+        })
     }
 
     fetchItems() {
@@ -52,24 +57,22 @@ export default class MainList extends React.Component {
             loading: true,
             error: '',
         }, () => {
-            setTimeout(() => {
-                getItems({
-                    search: this.state.search,
-                    filter: this.state.typeFilter,
-                    sortBy: this.state.sortBy,
-                })
-                    .then(data => {
-                        this.setState({
-                            items: data,
-                            loading: false,
-                        });
-                    })
-                    .catch((error) => {
-                        this.setState({
-                            error: error.toString(),
-                        });
+            getItems({
+                search: this.state.search,
+                typeFilter: this.state.typeFilter,
+                sortBy: this.state.sortBy,
+            })
+                .then(data => {
+                    this.setState({
+                        items: data,
+                        loading: false,
                     });
-            }, 1200);
+                })
+                .catch((error) => {
+                    this.setState({
+                        error: error.toString(),
+                    });
+                });
         });
     }
 
@@ -97,16 +100,17 @@ export default class MainList extends React.Component {
                         onChange={this.handleSearchChange} />
                 </Segment>
                 <Segment className="filter">
-                    <RadioExampleRadioGroup
+                    <RadioSelect
+                        value={this.state.sortBy}
+                        onChange={this.handleRadioChange}
                     />
                 </Segment>
                 <Segment className="filter">
-                    <SelectExample
+                    <SelectType
                         value={this.state.typeFilter}
                         onChange={this.handleTypeChange} />
                 </Segment>
             </Segment.Group>
-
             <List divided>
                 {
                     this.state.items.map(item => (
@@ -121,8 +125,8 @@ export default class MainList extends React.Component {
                                         item
                                     }
                                 }}>
-                                    <List.Header>{item.img}      {item.name}</List.Header>
-                                    <List.Description>{item.description}{String(item.type)}</List.Description>
+                                    <List.Header>{item.img}{item.name}</List.Header>
+                                    <List.Description>{item.description}</List.Description>
                                 </Link>
                             </List.Content>
                         </List.Item>

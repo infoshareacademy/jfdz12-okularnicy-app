@@ -1,23 +1,13 @@
 export function getItems({
     search = '',
-    // type
-    typeFilter = 'all',
-    //kategory
-    sortBy = 'name',
+    typeFilter = 11,
+    sortBy = ''
 
 }) {
     return fetch('items.json')
         .then(response => response.json())
         .then(data => {
             const filteredItems = data
-                .filter(
-                    item => {
-                        if (typeFilter === 'all') {
-                            return true;
-                        }
-                        return item.typeId === typeFilter;
-                    },
-                )
                 .filter(
                     item => {
                         const itemName = item.name.toLowerCase();
@@ -28,23 +18,24 @@ export function getItems({
                 )
                 .filter(
                     item => {
-                        if (typeFilter === 'all') return true;
-
-                        return item.type === typeFilter;
+                        const typeId = item.typeId;
+                        if (typeFilter === typeId || typeFilter === 11) {
+                            return true;
+                        }
+                        return null
+                    }
+                )
+                .filter(
+                    item => {
+                        const weather = item.weather;
+                        if (sortBy === '') return true
+                        if (weather.includes(sortBy)) {
+                            return true;
+                        }
+                        return null
                     }
                 )
 
-            const sortedItems =
-                filteredItems.sort((a, b) => {
-                    const sA = a[sortBy];
-                    const sB = b[sortBy];
-                    if (typeof sA === 'string') {
-                        return sA.localeCompare(sB);
-                    } else {
-                        return sA - sB;
-                    }
-                });
-
-            return Promise.resolve(sortedItems);
+            return Promise.resolve(filteredItems);
         });
 }
