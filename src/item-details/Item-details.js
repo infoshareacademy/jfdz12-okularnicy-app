@@ -5,7 +5,7 @@ import { AddToList } from '../user-list/AddToList'
 export default function ItemDetails(props) {
     const { item } = props.location.state
     return (
-        <Item.Group relaxed>
+         <Item.Group relaxed>
             <Item>
                 <Item.Image src={item.image ? item.image : null} />
                 <Item.Content>
@@ -21,5 +21,7 @@ export default function ItemDetails(props) {
             </Item>
 
         </Item.Group>
+    
+       
     )
 }
