@@ -34,11 +34,15 @@ export class AuthContext extends React.Component {
             this.setState({
                 userList: this.userData,
             })
+        } else {
+            this.setState ({
+                userList: []
+            })
         }
     }
 
     componentWillUpdate(nextProps, nextState) {
-        localStorage.setItem('userList', JSON.stringify(nextState));
+        localStorage.setItem('userList', JSON.stringify(nextState.userList));
     }
 
     render() {
