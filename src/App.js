@@ -8,11 +8,8 @@ import Dashboard from './dashboard/Dashboard';
 import ItemDetails from './item-details/Item-details';
 import UserList from './user-list/User-list';
 import {AuthContext}   from './auth/Auth';
+import { ItemForm } from './item-form/Item-form';
 
-const styleLink = document.createElement("link");
-styleLink.rel = "stylesheet";
-styleLink.href = "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
-document.head.appendChild(styleLink);
 
 
 function App() {
@@ -20,11 +17,15 @@ function App() {
     <AuthContext>
     <BrowserRouter>
       <Navigation />
-      <Container text style={{marginTop: '78px'}}>
+      <Container text style={{marginTop: '78px'}} >
         <Switch>
           <Route
             path="/user-list"
             component={UserList}
+          />
+          <Route
+            path="/item-form"
+            component={ItemForm}
           />
           <Route
             path="/dashboard"
