@@ -1,8 +1,18 @@
-[{
-    "id": 1,
-    "name": "",
-    "surname": "",
-    "email": "",
-    "itemsList": [],
-
-}]
+[
+    {
+        "id": 1,
+        "name": "Kris",
+        "email": "kris@example.com",
+        "itemList": [],
+        "description": "Proud parent, world explorer. Free spirit 🌍",
+        "image": "/userimage/kris.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Katy",
+        "email": "katyy@examples.com",
+        "itemList": [],
+        "description": "I am free spirit 🌍 ",
+        "image":"https://react.semantic-ui.com/images/avatar/large/matthew.png"
+    }
+]

@@ -1,0 +1,14 @@
+h1{
+    text-align: center;
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    text-align: center;
+}
+
+.filter {
+    padding: 10px !important;
+}
