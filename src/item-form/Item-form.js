@@ -1,17 +1,22 @@
 import React from 'react';
+import { Form } from 'semantic-ui-react';
+import "./item-form.css"
 
-export  class ItemForm extends React.Component {
+export class ItemForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       name: '',
-      type: 'food',
-      weather: 'cold',
+      type: '',
+      weather: '',
       description: '',
       img: '',
       itemTypes: [],
       weathers: [],
     };
+    
+          
+    this.handleClick = this.handleClick.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleTypeChange = this.handleTypeChange.bind(this);
     this.handleWeatherChange = this.handleWeatherChange.bind(this);
@@ -49,37 +54,46 @@ export  class ItemForm extends React.Component {
   handleWeatherChange(event) {
     this.setState({weather: event.target.value});
   }
+  handleClick(e) {
+    this.refs.fileUploader.click();
+}
 
-render() {
+
+  
+render() 
+
+    {
+    const optionsType = this.state.itemTypes.map(item => {
+        return item
+        })
   return (
-    <form>
-      <label>
-        Name:
-        <input type="text"
-        name="name"
-        value={this.state.name}
-        onChange={this.handleNameChange}
-        />
-      </label>
-      <label>
-        Type:
-        <select name="type" value={this.state.type} onChange={this.handleTypeChange}>
-        {this.state.itemTypes.map(item => {
-          return <option value={item.type}>{item.type}</option>
-        })}
-        </select>
-        
-      </label>
-      <label>
-        Weather:
-        <select name="weather" value={this.state.weather} onChange={this.handleWeatherChange}>
-          {this.state.weathers.map(weather => {
-            return <option value={weather.type}>{weather.type}</option>
-          })}
-        </select>
-      </label>
-      <button type="add">ADD</button>
-    </form>
+
+    <Form className="formGroup">
+        <Form.Group>
+            <Form.Input label='Name of new item' placeholder='Name' value=''/>
+      
+            <Form.Field label='Weather' control='select'>
+                {this.state.weathers.map(weather => {
+                return <option value={weather.type}>{weather.type}</option>
+                })}
+            </Form.Field>
+
+            <Form.Field label='Type' control='select'>
+                {this.state.itemTypes.map(item => {
+                return <option placeholder='Weather' value={item.value}>{item.value}</option>
+                })}
+            </Form.Field>
+        </Form.Group>
+          <div className="formButtons">   
+            <Form.Button onClick={this.handleClick}>
+              Add picture
+           </Form.Button>
+           <input type="file" id="file" ref="fileUploader" style={{display: "none"}}/>
+            <Form.Button>
+              Add item
+            </Form.Button>
+          </div> 
+    </Form>
   )
 }
 
