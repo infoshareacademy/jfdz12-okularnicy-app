@@ -7,42 +7,42 @@ import MainList from './main-list/Main-list';
 import Dashboard from './dashboard/Dashboard';
 import ItemDetails from './item-details/Item-details';
 import UserList from './user-list/User-list';
-import {AuthContext}   from './auth/Auth';
-
-const styleLink = document.createElement("link");
-styleLink.rel = "stylesheet";
-styleLink.href = "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
-document.head.appendChild(styleLink);
-
+import { AuthContext }   from './auth/Auth';
+import UserProfile from './user-profile/User-profile';
 
 function App() {
   return (
     <AuthContext>
-    <BrowserRouter>
-      <Navigation />
-      <Container text style={{marginTop: '78px'}}>
-        <Switch>
-          <Route
-            path="/user-list"
-            component={UserList}
-          />
-          <Route
-            path="/dashboard"
-            component={Dashboard}
-          />
-          <Route
-            path="/items/:id"
-            component={ItemDetails}
-            exact
-          />
-          <Route
-            path="/"
-            component={MainList}
-          />
-          <Redirect to="/" />
-        </Switch>
+      <BrowserRouter>
+        <Navigation />
+        <Container text style={{ marginTop: '78px' }}>
+          <Switch>
+            <Route
+              path="/user-list"
+              component={UserList}
+            />
+            <Route
+              path="/dashboard"
+              component={Dashboard}
+            />
+            <Route
+              path='/userProfile'
+              component={UserProfile}
+            />
+            <Route
+              path="/items/:id"
+              component={ItemDetails}
+              exact
+            />
+            <Route
+              path="/"
+              component={MainList}
+            />
+
+            <Redirect to="/" />
+          </Switch>
         </Container>
-    </BrowserRouter>
+      </BrowserRouter>
     </AuthContext>
   );
 }
