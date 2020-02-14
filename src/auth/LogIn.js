@@ -3,8 +3,8 @@ import React from 'react';
 import { Button, Divider, Grid, Segment, Form, Message } from 'semantic-ui-react'
 import firebase from "firebase";
 
-export function Login () {
-  return  <Segment >
+export function Login() {
+    return <Segment >
         <Grid columns={2} relaxed='very' stackable>
             <Grid.Column verticalAlign='middle'>
                 <SignIn />
@@ -104,6 +104,7 @@ export class SignIn extends React.Component {
 
 export default class SignUp extends React.Component {
     state = {
+        name: '',
         email: '',
         password: '',
         error: null
@@ -121,8 +122,21 @@ export default class SignUp extends React.Component {
     };
 
     signUp = () => {
-        const { email, password } = this.state;
+        const { email, password, name } = this.state;
         firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then(() => {
+                const user = firebase.auth().currentUser
+                
+                
+                if (user) {
+                    console.log(user);
+                    user.updateProfile({
+                        displayName: name,
+                    })
+                        .then(s => console.log(s))
+                        .catch(err => console.log(err))
+                }
+            })
             .catch(error => {
                 const errorCode = error.code;
                 if (errorCode == 'auth/weak-password') {
@@ -144,7 +158,7 @@ export default class SignUp extends React.Component {
     };
 
     render() {
-        const { email, password, error } = this.state;
+        const { email, password, error, name } = this.state;
         return (
             <Form>
                 <Message
@@ -162,6 +176,17 @@ export default class SignUp extends React.Component {
                     required
                     fluid
                     icon='user'
+                    iconPosition='left'
+                    placeholder='Name'
+                    type="text"
+                    value={name}
+                    name='name'
+                    onChange={this.handleOnChange}
+                />
+                <Form.Input
+                    required
+                    fluid
+                    icon='mail'
                     iconPosition='left'
                     placeholder='E-mail'
                     type="email"

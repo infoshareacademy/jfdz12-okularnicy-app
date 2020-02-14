@@ -65,34 +65,4 @@ export class AuthContext extends React.Component {
 
             </>
     }
-
-    // componentDidMount() {
-    //     this.userData = JSON.parse(localStorage.getItem('userList'));
-
-    //     if (localStorage.getItem('userList')) {
-    //         this.setState({
-    //             userList: this.userData,
-    //         })
-    //     } else {
-    //         this.setState ({
-    //             userList: []
-    //         })
-    //     }
-    // }
-
-    // componentWillUpdate(nextProps, nextState) {
-    //     localStorage.setItem('userList', JSON.stringify(nextState.userList));
-    // }
-
-    //     render() {
-    //         return (
-    //             // <MyContext.Provider value={{
-    //                 state: this.state,
-    //                 addToList: this.addToList,
-    //                 removeFromList: this.removeFromList,
-    //             }}>
-    //                 {this.props.children}
-    //             {/* </MyContext.Provider> */}
-    //         )
-    //     }
 }

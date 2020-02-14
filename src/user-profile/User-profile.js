@@ -9,7 +9,6 @@ import { MyContext } from '../auth/Auth'
 export default class UserProfile extends React.Component {
     static contextType = MyContext
     state = {
-        userData: [],
         isLoaded: false,
         editPhoto: false,
         img: null,
@@ -42,12 +41,12 @@ export default class UserProfile extends React.Component {
     }
 
     render() {
-        const { error, isLoaded, editPhoto, userData } = this.state;
+        const { editPhoto } = this.state;
         return < Container>
             <Header>User Panel </Header>
-            <Grid columns={2} relaxed='very'>
+            <Grid columns={2} relaxed='very' stackable>
                 <Grid.Column>
-                    <Image wrapped size='medium' src={this.context.state.user.photoURL} />
+                    <Image wrapped size='medium' src={this.context.state.user.photoURL || '/assets/userPlaceholder.jpg'} />
 
                     {editPhoto
                         ? <Button negative onClick={this.handleclick} compact floated='right'>Change photo</Button>
@@ -57,8 +56,7 @@ export default class UserProfile extends React.Component {
                         </Form>)}
                 </Grid.Column>
                 <Grid.Column>
-                    <Header>Hello {userData.name || 'stranger'}!</Header>
-                    <p>{userData.description || null}</p>
+                    <Header>Hello {this.context.state.user.displayName || 'stranger'}!</Header>
                     <Button.Group vertical>
                         <Link to={'/user-list'}><Button icon labelPosition='left' primary onClick={this.handleclick} style={{ margin: "5px" }}><Icon fitted name='list' /> My list</Button></Link>
                         <Link to={'/dashboard'}><Button icon labelPosition='left' onClick={this.handleclick} style={{ margin: "5px" }}><Icon fitted name='chart pie' /> Dashboard</Button></Link>

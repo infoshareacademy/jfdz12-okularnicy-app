@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Icon, Menu, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
-import UserProfile from '../user-profile/User-profile';
+import firebase from 'firebase'
 
 export default class Navigation extends Component {
   state = {
@@ -9,12 +9,12 @@ export default class Navigation extends Component {
   }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  handleLogout = () => firebase.auth().signOut()
 
   render() {
     const { activeItem } = this.state
 
     return (
-
       <Menu icon='labeled' size='mini' fixed='top'>
         <Link to="/user-list">
           <Menu.Item
@@ -25,7 +25,7 @@ export default class Navigation extends Component {
             <Icon name='list ul' />
             My list
         </Menu.Item>
-        </Link>
+        </Link> 
         <Link to="/">
           <Menu.Item
             name='home'
@@ -47,6 +47,7 @@ export default class Navigation extends Component {
               Your profile
             </Menu.Item>
           </Link>
+          <Button onClick={this.handleLogout} content="Logout"/>
         </Menu.Menu>
       </Menu>
 
