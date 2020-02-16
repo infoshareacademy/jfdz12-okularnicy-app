@@ -7,7 +7,8 @@ import MainList from './main-list/Main-list';
 import Dashboard from './dashboard/Dashboard';
 import ItemDetails from './item-details/Item-details';
 import UserList from './user-list/User-list';
-import {AuthContext}   from './auth/Auth';
+import { AuthContext }   from './auth/Auth';
+import UserProfile from './user-profile/User-profile';
 import { ItemForm } from './item-form/Item-form';
 
 
@@ -28,6 +29,10 @@ function App() {
             component={ItemForm}
           />
           <Route
+              path='/userProfile'
+              component={UserProfile}
+            />
+          <Route
             path="/dashboard"
             component={Dashboard}
           />
@@ -43,7 +48,7 @@ function App() {
           <Redirect to="/" />
         </Switch>
         </Container>
-    </BrowserRouter>
+      </BrowserRouter>
     </AuthContext>
   );
 }

@@ -1,17 +1,40 @@
 import React from 'react'
+import firebase from "firebase";
+import { Login } from './LogIn';
 export const MyContext = React.createContext(null);
 
 
 export class AuthContext extends React.Component {
     state = {
+        user: null,
         userList: [],
     }
 
+    componentDidMount() {
+        const authRef = firebase.auth().onAuthStateChanged(user => {
+            this.setState({
+                user
+            })
+        })
+
+        this.setState({
+            ref: authRef
+        })
+    }
+
+    componentWillUnmount() {
+        if (this.state.ref) {
+            this.state.ref();
+        }
+    }
+
     addToList = (e) => {
+
         this.setState({
             userList: [...this.state.userList, e]
-
-        })
+        }, () => firebase.database().ref('user-items/' + this.state.user.uid).set({
+            list: [...this.state.userList]
+        }))
 
     }
 
@@ -24,36 +47,22 @@ export class AuthContext extends React.Component {
         this.setState({
             userList: userlist
 
-        })
+        }, () => firebase.database().ref('user-items/' + this.state.user.uid).set({
+            list: [...this.state.userList]
+        }))
     }
-
-    componentDidMount() {
-        this.userData = JSON.parse(localStorage.getItem('userList'));
-
-        if (localStorage.getItem('userList')) {
-            this.setState({
-                userList: this.userData,
-            })
-        } else {
-            this.setState ({
-                userList: []
-            })
-        }
-    }
-
-    componentWillUpdate(nextProps, nextState) {
-        localStorage.setItem('userList', JSON.stringify(nextState.userList));
-    }
-
     render() {
-        return (
-            <MyContext.Provider value={{
+        return this.state.user
+            ? <MyContext.Provider value={{
                 state: this.state,
                 addToList: this.addToList,
                 removeFromList: this.removeFromList,
             }}>
                 {this.props.children}
             </MyContext.Provider>
-        )
+            : <>
+                <Login />
+
+            </>
     }
 }

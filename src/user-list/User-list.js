@@ -14,18 +14,30 @@ export default class UserList extends React.Component {
     }
 
     componentDidMount() {
-        fetch("items.json")
+        fetch("https://okularnicy-app.firebaseio.com/items.json")
             .then(response => response.json())
-            .then(data => this.setState({ items: data }))
+            .then(data => {
+                if (data) {
+                    const keys = Object.keys(data);
+                    const formattedData = keys.map(key => {
+                        return {
+                            id: key,
+                            ...data[key]
+                        }
+                    });
+                    this.setState({
+                        items: formattedData,
+                    })
+                }
+            })
             .catch(err => this.setState({ error: err }))
             .finally(() => this.setState({ loading: false }))
-        
+
 
     }
     filterItems() {
         const userListObjects = []
         this.state.items.map((item) => {
-            console.log (this.context.state.userList)
             if (this.context.state.userList.includes(item.id)) {
                 userListObjects.push(item)
                 return null
@@ -69,7 +81,7 @@ export default class UserList extends React.Component {
                                 </List.Content>
                             </Link>
                             <List.Content floated='right'>
-                            <AddToList itemId={item.id} iconic={true} />
+                                <AddToList itemId={item.id} iconic={true} />
                             </List.Content>
                         </List.Item>
                     )

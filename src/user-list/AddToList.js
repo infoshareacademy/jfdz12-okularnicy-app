@@ -17,16 +17,13 @@ export function AddToList(props) {
                             <Icon name='plus' />
                         </Button>)
                 }
-
-
-
             </>
         )
     }
 
     return (
         <>
-            {(findItem(props.itemId) > -1) ? (<Button itemId={props.itemId} color='red' floated='right' onClick={(e) => userList.removeFromList(props.itemId)}>
+            {(findItem(props.itemId) > -1) ? (<Button itemId={props.itemId} coSr='red' floated='right' onClick={(e) => userList.removeFromList(props.itemId)}>
                 Remove<Icon name='right minus' />
             </Button>
             )
