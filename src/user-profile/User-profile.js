@@ -1,7 +1,8 @@
 import React from 'react';
-import { Icon, Button, Header, Image, Grid, Container, Form } from 'semantic-ui-react'
+import { Card, Segment, Icon, Button, Header, Image, Grid, Container, Form, Progress, Label, Message } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 import firebase from 'firebase'
+import 'firebase/storage';
 
 import { MyContext } from '../auth/Auth'
 
@@ -12,9 +13,16 @@ export default class UserProfile extends React.Component {
         isLoaded: false,
         editPhoto: false,
         img: null,
-        refresh: false
+        uploadProgress: null,
+        uploadError: null,
+        uploadSuccess: null,
+        uploadMessage: "",
+        visible: false
     };
 
+    handleDismiss = () => {
+        this.setState({ visible: false })
+    }
 
     handleclick = () => this.setState(prevState => ({ editPhoto: !prevState.editPhoto }))
 
@@ -26,34 +34,72 @@ export default class UserProfile extends React.Component {
 
     handleSave = () => {
         const userId = firebase.auth().currentUser.uid;
-        firebase.storage().ref('users/' + userId)
-            .put(this.state.img)
-            .then((res) => {
-                res.ref.getDownloadURL().then(url => {
-                    this.context.state.user.updateProfile({
-                        photoURL: url
-                    }).then(() => this.setState((prevState) => ({
-                        refresh: !prevState.refresh
-                    }))).catch(error => console.log(error))
-                })
+        const uploadTask = firebase.storage().ref('users/' + userId).put(this.state.img, {
+            contentType: 'image/jpeg'
+        });
+        uploadTask.on('state_changed', (snapshot) => {
+            // Observe state change events such as progress, pause, and resume
+            // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+            let uploadProgress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            this.setState({
+                uploadProgress,
+                uploadSuccess: false,
+                uploadMessage: "Uploading photo...",
+                visible: true,
+            })
+        }, (uploadError) => {
+            this.setState({
+                uploadError,
+                uploadMessage: "An error occured, please try again.",
+                uploadProgress: null
 
             })
+        }, () => {
+            uploadTask.snapshot.ref.getDownloadURL().then(url => {
+                this.context.state.user.updateProfile({
+                    photoURL: url
+                }).then(() => this.setState((prevState) => ({
+                    refresh: !prevState.refresh,
+                    uploadSuccess: true,
+                    uploadMessage: "Photo updated successfully",
+                    uploadProgress: !prevState.uploadProgress,
+                    editPhoto: false
+                })))
+            });
+        });
+
     }
 
     render() {
-        const { editPhoto } = this.state;
+        const { editPhoto, img, uploadError, uploadProgress, uploadSuccess, visible, uploadMessage } = this.state;
         return < Container>
             <Header>User Panel </Header>
             <Grid columns={2} relaxed='very' stackable>
                 <Grid.Column>
-                    <Image wrapped size='medium' src={this.context.state.user.photoURL || '/assets/userPlaceholder.jpg'} />
-
-                    {editPhoto
-                        ? <Button negative onClick={this.handleclick} compact floated='right'>Change photo</Button>
-                        : (<Form>
-                            <input type='file' onChange={this.handleOnImgChange} />
-                            <Button compact icon='save' content='Zapisz' positive type='submit' onClick={this.handleSave} />
-                        </Form>)}
+                    <Card>
+                        <Message
+                            positive={uploadSuccess}
+                            hidden={!visible}
+                            attached="top"
+                            content={<>{uploadMessage}
+                                {uploadProgress && <Progress size="tiny" color='blue' percent={uploadProgress} success={uploadSuccess} error={uploadError} />}
+                            </>
+                            }
+                            onDismiss={this.handleDismiss} />
+                        <Image centered wrapped size='medium' src={this.context.state.user.photoURL || '/assets/userPlaceholder.jpg'} />
+                        {!editPhoto
+                            ? <Button color='orange' onClick={this.handleclick}>Change photo</Button>
+                            : <Form>
+                                <Button.Group fluid>
+                                    <label className='fileContainer'>
+                                        <Button disabled={uploadProgress} content="Browse" icon="image" />
+                                        <input type='file' onChange={this.handleOnImgChange} />
+                                    </label>
+                                    <Button disabled={!img || uploadProgress} icon='save' content='Zapisz' positive type='submit' onClick={this.handleSave} />
+                                    <Button icon='cancel' type='submit' onClick={this.handleclick} />
+                                </Button.Group>
+                            </Form>}
+                    </Card>
                 </Grid.Column>
                 <Grid.Column>
                     <Header>Hello {this.context.state.user.displayName || 'stranger'}!</Header>
