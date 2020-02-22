@@ -1,15 +1,33 @@
-import React from 'react'
-import { Item } from 'semantic-ui-react'
+import React, { useState, useEffect } from 'react'
+import { Item, Loader, Dimmer } from 'semantic-ui-react'
 import { AddToList } from '../user-list/AddToList'
 
 export default function ItemDetails(props) {
-    const { item } = props.location.state
-    return (
-         <Item.Group relaxed>
+    const [item, setItem] = useState('')
+    const [error, setError] = useState(false)
+    const [loading, setLoading] = useState(true)
+
+
+
+    useEffect(() => {
+        fetch(`https://okularnicy-app.firebaseio.com/items/${props.location.state.item.id}.json`)
+            .then(response => response.json())
+            .then(data => {
+                setItem(data)
+                setLoading(false)
+            })
+            .catch(err => setError(err))
+    }, [])
+
+    return loading
+        ? <Dimmer active inverted>
+            <Loader size='large'>Loading</Loader>
+        </Dimmer>
+        : <Item.Group relaxed>
             <Item>
                 <Item.Image src={item.image ? item.image : null} />
                 <Item.Content>
-                    <Item.Header as='a'>{item.img ? item.img : null} {item.name}</Item.Header>
+                    <Item.Header>{item.img ? item.img : null} {item.name}</Item.Header>
                     <Item.Meta>
                         <span>{item.description}</span>
                     </Item.Meta>
@@ -21,7 +39,6 @@ export default function ItemDetails(props) {
             </Item>
 
         </Item.Group>
-    
-       
-    )
+
+
 }

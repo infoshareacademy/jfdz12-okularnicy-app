@@ -95,7 +95,7 @@ export default class UserProfile extends React.Component {
                                         <Button disabled={uploadProgress} content="Browse" icon="image" />
                                         <input type='file' onChange={this.handleOnImgChange} />
                                     </label>
-                                    <Button disabled={!img || uploadProgress} icon='save' content='Zapisz' positive type='submit' onClick={this.handleSave} />
+                                    <Button disabled={!img || uploadProgress} icon='save' content='Save' positive type='submit' onClick={this.handleSave} />
                                     <Button icon='cancel' type='submit' onClick={this.handleclick} />
                                 </Button.Group>
                             </Form>}

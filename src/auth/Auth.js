@@ -1,6 +1,7 @@
 import React from 'react'
 import firebase from "firebase";
 import { Login } from './LogIn';
+import Navigation from '../navigation/Navigation';
 export const MyContext = React.createContext(null);
 
 
@@ -52,17 +53,12 @@ export class AuthContext extends React.Component {
         }))
     }
     render() {
-        return this.state.user
-            ? <MyContext.Provider value={{
-                state: this.state,
-                addToList: this.addToList,
-                removeFromList: this.removeFromList,
-            }}>
-                {this.props.children}
-            </MyContext.Provider>
-            : <>
-                <Login />
-
-            </>
+        return <MyContext.Provider value={{
+            state: this.state,
+            addToList: this.addToList,
+            removeFromList: this.removeFromList,
+        }}>
+            {this.props.children}
+        </MyContext.Provider>
     }
 }

@@ -1,13 +1,9 @@
 import React from 'react'
-import { Select } from 'semantic-ui-react'
+import { Select, Dropdown } from 'semantic-ui-react'
 
 const typeOptions =
     [
-        {
-            "key": "11",
-            "value": 11,
-            "text": "all"
-        },
+
         {
             "key": "1",
             "value": 1,
@@ -61,7 +57,11 @@ const typeOptions =
     ]
 
 function SelectType(props) {
-    return (<Select placeholder='Type' onChange={props.onChange} options={typeOptions} />)
+    const handleChange = (e, { value }) => {
+        props.handleChangeType(value)
+    }
+
+    return <Dropdown fluid selection placeholder='Type' clearable value={props.value} onChange={handleChange} options={typeOptions} selection />
 }
 
 export default SelectType
