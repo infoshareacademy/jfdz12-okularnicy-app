@@ -1,3 +1,17 @@
+body {
+    background-image: url("./images/background.jpg");
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.containerWrapper {
+    background: rgb(255, 255, 255);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.8897934173669468) 0%, rgba(255, 255, 255, 0.7805497198879552) 100%);
+    padding: 78px 20px 10px;
+}
+
 .fileContainer {
     overflow: hidden;
     position: relative;
@@ -15,4 +29,8 @@
     right: 0;
     text-align: right;
     top: 0;
+}
+
+.item-done {
+    text-decoration: line-through;
 }

@@ -33,7 +33,8 @@ export default function ItemDetails(props) {
                     </Item.Meta>
                     <Item.Description>Tip: {item.proTip}</Item.Description>
                     <Item.Extra>
-                        <AddToList item={item} />
+                        <AddToList item={item} list desc/>
+                        
                     </Item.Extra>
                 </Item.Content>
             </Item>

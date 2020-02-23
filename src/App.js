@@ -19,7 +19,7 @@ function App() {
   
       <BrowserRouter>
         <Navigation />
-        <Container style={{ paddingTop: '78px'}} >
+        <Container className="containerWrapper" >
           <AuthProtected>
             <Switch>
               <Route

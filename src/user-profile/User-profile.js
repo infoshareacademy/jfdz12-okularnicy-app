@@ -58,13 +58,16 @@ export default class UserProfile extends React.Component {
             uploadTask.snapshot.ref.getDownloadURL().then(url => {
                 this.context.state.user.updateProfile({
                     photoURL: url
-                }).then(() => this.setState((prevState) => ({
-                    refresh: !prevState.refresh,
-                    uploadSuccess: true,
-                    uploadMessage: "Photo updated successfully",
-                    uploadProgress: !prevState.uploadProgress,
-                    editPhoto: false
-                })))
+                }).then(() => {
+                    this.setState((prevState) => ({
+                        // refresh: !prevState.refresh,
+                        uploadSuccess: true,
+                        uploadMessage: "Photo updated successfully",
+                        uploadProgress: !prevState.uploadProgress,
+                        editPhoto: false
+                    }))
+                    this.context.refresh()
+                })
             });
         });
 

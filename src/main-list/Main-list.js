@@ -67,7 +67,7 @@ function MainList() {
             .map(item => (
                 <List.Item key={item.id}>
                     <List.Content floated='right'>
-                        <AddToList item={item} iconic={true} />
+                        <AddToList item={item} iconic={true} desc/>
                     </List.Content>
                     <List.Content>
                         <Link to={{
@@ -121,7 +121,7 @@ function MainList() {
             {list}
             <List.Item>
                 <Link to="/item-add">
-                    <Button fluid>Missed?</Button>
+                    <Button fluid>Missing something? Add new item</Button>
                 </Link>
             </List.Item>
         </List>

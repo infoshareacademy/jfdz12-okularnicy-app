@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Icon, Menu, Button } from 'semantic-ui-react'
+import { Icon, Menu, Button, Image, Label } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 import firebase from 'firebase'
 import { MyContext } from '../auth/Auth';
@@ -21,6 +21,9 @@ const Navigation = () => {
           onClick={handleItemClick}
         >
           <Icon name='list ul' />
+          {context.state.userList.length > 0 && <Label color='teal' corner size="mini">
+            {context.state.userList.length}
+          </Label>}
           My list
         </Menu.Item>
       </Link>
@@ -42,9 +45,11 @@ const Navigation = () => {
             active={activeItem === 'user'}
             onClick={handleItemClick}
           >
-            <Icon name='user circle' />
-            Your profile
-            </Menu.Item>
+            <Image
+              size="mini"
+              avatar
+              src={context.state.user.photoURL || '/assets/userPlaceholder.jpg'} />
+          </Menu.Item>
 
         </Link>
         <Menu.Item>
