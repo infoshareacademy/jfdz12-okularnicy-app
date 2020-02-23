@@ -67,7 +67,7 @@ export default class UserList extends React.Component {
             <h1> Things to pack</h1>
             <List divided>
                 {
-                    this.filterItems().map(item =>
+                    this.context.state.userList.map(item =>
                         <List.Item key={item.id}>
                             <Link to={{
                                 pathname: `/items/${item.id}`,
@@ -81,7 +81,7 @@ export default class UserList extends React.Component {
                                 </List.Content>
                             </Link>
                             <List.Content floated='right'>
-                                <AddToList itemId={item.id} iconic={true} />
+                                <AddToList item={item}  iconic={true} />
                             </List.Content>
                         </List.Item>
                     )

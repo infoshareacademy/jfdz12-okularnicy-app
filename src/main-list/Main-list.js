@@ -67,7 +67,7 @@ function MainList() {
             .map(item => (
                 <List.Item key={item.id}>
                     <List.Content floated='right'>
-                        <AddToList itemId={item.id} iconic={true} />
+                        <AddToList item={item} iconic={true} />
                     </List.Content>
                     <List.Content>
                         <Link to={{

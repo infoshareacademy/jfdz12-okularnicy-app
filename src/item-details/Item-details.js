@@ -5,15 +5,15 @@ import { AddToList } from '../user-list/AddToList'
 export default function ItemDetails(props) {
     const [item, setItem] = useState('')
     const [error, setError] = useState(false)
-    const [loading, setLoading] = useState(true)
-
-
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        fetch(`https://okularnicy-app.firebaseio.com/items/${props.location.state.item.id}.json`)
+        fetch(`https://okularnicy-app.firebaseio.com/items/${props.match.params.id}.json`)
             .then(response => response.json())
             .then(data => {
-                setItem(data)
+                const currentitem = data
+                currentitem.id = props.match.params.id
+                setItem(currentitem)
                 setLoading(false)
             })
             .catch(err => setError(err))
@@ -33,7 +33,7 @@ export default function ItemDetails(props) {
                     </Item.Meta>
                     <Item.Description>Tip: {item.proTip}</Item.Description>
                     <Item.Extra>
-                        <AddToList itemId={item.id} />
+                        <AddToList item={item} />
                     </Item.Extra>
                 </Item.Content>
             </Item>
