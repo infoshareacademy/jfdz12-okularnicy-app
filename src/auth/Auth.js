@@ -1,25 +1,25 @@
 import React from 'react'
 import firebase from "firebase";
-import { Login } from './LogIn';
 export const MyContext = React.createContext(null);
 
 
 export class AuthContext extends React.Component {
     state = {
-        user: null,
+        user: '',
         userList: [],
+        refresh: false
     }
 
     componentDidMount() {
         const authRef = firebase.auth().onAuthStateChanged(user => {
             this.setState({
                 user
-            })
+            }, () => this.fetchList())
         })
-
         this.setState({
             ref: authRef
         })
+
     }
 
     componentWillUnmount() {
@@ -28,19 +28,29 @@ export class AuthContext extends React.Component {
         }
     }
 
-    addToList = (e) => {
+    fetchList = () => {
+        if (this.state.user) {
+            firebase.database().ref('user-items/' + this.state.user.uid + '/list')
+                .on('value', (snapshot) => {
+                    let list = snapshot.val()
+                    list ? this.setState({ userList: list }) : this.setState({ userList: [] })
+                })
+        }
+    }
 
+    addToList = (e) => {
+        const addedItem = e
+        addedItem.done = false
         this.setState({
-            userList: [...this.state.userList, e]
+            userList: [...this.state.userList, addedItem]
         }, () => firebase.database().ref('user-items/' + this.state.user.uid).set({
             list: [...this.state.userList]
         }))
-
     }
 
     removeFromList = (e) => {
         const userlist = [...this.state.userList]
-        const index = this.state.userList.indexOf(e);
+        const index = this.state.userList.map(item => item.id).indexOf(e);
         if (index > -1) {
             userlist.splice(index, 1);
         }
@@ -51,18 +61,37 @@ export class AuthContext extends React.Component {
             list: [...this.state.userList]
         }))
     }
-    render() {
-        return this.state.user
-            ? <MyContext.Provider value={{
-                state: this.state,
-                addToList: this.addToList,
-                removeFromList: this.removeFromList,
-            }}>
-                {this.props.children}
-            </MyContext.Provider>
-            : <>
-                <Login />
+    markAsDone = (e) => {
+        const userlist = [...this.state.userList]
+        const index = this.state.userList.map(item => item.id).indexOf(e);
+        if (index > -1) {
+            console.log("done", userlist);
+            
+            userlist[index].done = !userlist[index].done;
+        }
+        this.setState({
+            userList: userlist
 
-            </>
+        }, () => firebase.database().ref('user-items/' + this.state.user.uid).set({
+            list: [...this.state.userList]
+        }))
+    }
+
+    refresh = () => {
+        this.setState((prevState) => ({
+            refresh: !prevState.refresh
+        }))
+    }
+
+    render() {
+        return <MyContext.Provider value={{
+            state: this.state,
+            addToList: this.addToList,
+            markAsDone: this.markAsDone,
+            removeFromList: this.removeFromList,
+            refresh: this.refresh
+        }}>
+            {this.props.children}
+        </MyContext.Provider>
     }
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, List, Segment, Loader, Dimmer } from 'semantic-ui-react';
+import { Image, List, Segment, Loader, Dimmer, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { AddToList } from '../user-list/AddToList';
 import { MyContext } from '../auth/Auth'
@@ -65,28 +65,32 @@ export default class UserList extends React.Component {
 
         return <>
             <h1> Things to pack</h1>
-            <List divided>
+            {this.context.state.userList.length < 1
+            ? <> <h3>Nothing to pack</h3> <Link to='/' ><Button color="orange" fluid content="See list of items"/></Link></>
+            :<List divided>
                 {
-                    this.filterItems().map(item =>
+                    this.context.state.userList.map(item =>
                         <List.Item key={item.id}>
+                            < List.Content floated='right'>
+                                <AddToList item={item} iconic={true} list desc />
+                            </List.Content>
                             <Link to={{
                                 pathname: `/items/${item.id}`,
                                 state: {
                                     item
                                 }
                             }}>
-                                <List.Content>
-                                    <List.Header>{item.img} {item.name}</List.Header>
+
+                                <List.Content className={item.done && 'item-done'}>
+                                    <List.Header >{item.img} {item.name}</List.Header>
                                     <List.Description>{item.description}</List.Description>
                                 </List.Content>
                             </Link>
-                            <List.Content floated='right'>
-                                <AddToList itemId={item.id} iconic={true} />
-                            </List.Content>
+
                         </List.Item>
                     )
                 }
-            </List>
+            </List>}
         </>
     }
 }

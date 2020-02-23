@@ -6,6 +6,7 @@ import firebase from "firebase";
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { AuthContext } from './auth/Auth';
 
 const firebaseConfig = {
     apiKey: "AIzaSyCZXhm3zcG9vYBUhqKicIHKrcf1teHS4uM",
@@ -19,7 +20,10 @@ const firebaseConfig = {
   };
   firebase.initializeApp(firebaseConfig);
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+<AuthContext>
+<App />
+</AuthContext>, document.getElementById('root'));
 
 
 

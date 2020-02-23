@@ -1,41 +1,40 @@
 import React, { useContext } from 'react';
-import { Button, Icon } from 'semantic-ui-react'
+import { Button, Icon, Label } from 'semantic-ui-react'
 import { MyContext } from '../auth/Auth'
 
 export function AddToList(props) {
     const userList = useContext(MyContext)
-    function findItem(itemId) { return (userList.state.userList.indexOf(itemId)) }
-    if (props.iconic) {
-        return (
-            <>
-                {(findItem(props.itemId) > -1) ? (<Button itemId={props.itemId}  size="large" color='red' icon floated='right' onClick={(e) => userList.removeFromList(props.itemId)}>
-                    <Icon name='minus' />
-                </Button>
-                )
-                    : (
-                        <Button itemId={props.itemId} color='green' floated='right' size={"large"} icon onClick={(e) => userList.addToList(props.itemId)}>
-                            <Icon name='plus' />
-                        </Button>)
-                }
-            </>
-        )
-    }
+    function findItem(item) { return (userList.state.userList.map(item => item.id).indexOf(item.id)) }
+    const isPacked = () => userList.state.userList[findItem(props.item)].done
 
-    return (
-        <>
-            {(findItem(props.itemId) > -1) ? (<Button itemId={props.itemId} coSr='red' floated='right' onClick={(e) => userList.removeFromList(props.itemId)}>
-                Remove<Icon name='right minus' />
+    return <> {(findItem(props.item) > -1)
+        ? <>
+            <Button size="large" color='red' icon floated='right' onClick={() => userList.removeFromList(props.item.id)}>
+                <Icon name='minus' />
             </Button>
-            )
-                : (
-                    <Button itemId={props.itemId} color='green' floated='right' onClick={(e) => userList.addToList(props.itemId)}>
-                        Add<Icon name='right plus' />
-                    </Button>)
+
+            {props.desc &&
+                (isPacked()
+                    ? <Label color='green' horizontal>
+                        Packed
+              </Label>
+                    
+                    : <Label color='gray' horizontal>
+                    To pack
+          </Label>
+                )
             }
-
-
-
+            {props.list &&
+                <Button size="large" color={isPacked() && "orange"} icon floated='right' onClick={() => userList.markAsDone(props.item.id)}>
+                    <Icon color={isPacked() && "green"} name='check' />
+                </Button>}
         </>
-    )
+        : <Button color='green' floated='right' size={"large"} icon onClick={() => userList.addToList(props.item)}>
+            <Icon name='plus' />
+        </Button>
+    }
+    </>
+
+
 }
 
