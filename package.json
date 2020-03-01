@@ -2,10 +2,12 @@
   "name": "packmeapp",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://adambrudzynski.github.io/jfdz12-okularnicy-app/",
   "dependencies": {
     "@material-ui/core": "^4.7.2",
     "@material-ui/icons": "^4.5.1",
     "firebase": "^7.8.1",
+    "gh-pages": "^2.2.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-minimal-pie-chart": "^6.0.1",
@@ -16,10 +18,13 @@
     "uid": "0.0.2"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+
   },
   "eslintConfig": {
     "extends": "react-app"

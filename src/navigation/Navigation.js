@@ -10,7 +10,7 @@ const Navigation = () => {
   const context = useContext(MyContext)
 
   const handleItemClick = (e, { name }) => setActiveItem(name)
-  const handleLogout = () => firebase.auth().signOut()
+  const handleLogout = () => context.logout()
 
   return (
     <Menu icon='labeled' size='mini' fixed='top'>

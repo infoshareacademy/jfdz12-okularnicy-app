@@ -66,7 +66,7 @@ export class AuthContext extends React.Component {
         const index = this.state.userList.map(item => item.id).indexOf(e);
         if (index > -1) {
             console.log("done", userlist);
-            
+
             userlist[index].done = !userlist[index].done;
         }
         this.setState({
@@ -83,13 +83,23 @@ export class AuthContext extends React.Component {
         }))
     }
 
+    logout = () => {
+        firebase.auth().signOut()
+            .then(() => this.setState({
+                user: '',
+                userList: []
+            }))
+
+    }
+
     render() {
         return <MyContext.Provider value={{
             state: this.state,
             addToList: this.addToList,
             markAsDone: this.markAsDone,
             removeFromList: this.removeFromList,
-            refresh: this.refresh
+            refresh: this.refresh,
+            logout: this.logout
         }}>
             {this.props.children}
         </MyContext.Provider>
