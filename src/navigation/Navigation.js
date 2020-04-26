@@ -13,7 +13,7 @@ const Navigation = () => {
   const handleLogout = () => context.logout()
 
   return (
-    <Menu icon='labeled' size='mini' fixed='top'>
+    <Menu icon='labeled' size='mini' fixed='bottom'>
       <Link to="/user-list">
         <Menu.Item
           name='list'
@@ -21,7 +21,7 @@ const Navigation = () => {
           onClick={handleItemClick}
         >
           <Icon name='list ul' />
-          {context.state.userList.length > 0 && <Label color='teal' corner size="mini">
+          {context.state.userList.length > 0 && <Label floating color='teal' circular>
             {context.state.userList.length}
           </Label>}
           My list
@@ -35,6 +35,16 @@ const Navigation = () => {
         >
           <Icon name='home' />
           Home
+        </Menu.Item>
+      </Link>
+      <Link to="/wallet">
+        <Menu.Item
+          name='wallet'
+          active={activeItem === 'wallet'}
+          onClick={handleItemClick}
+        >
+          <Icon name='money bill alternate outline' />
+          Wallet
         </Menu.Item>
       </Link>
 

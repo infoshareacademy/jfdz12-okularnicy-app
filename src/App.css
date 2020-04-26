@@ -9,7 +9,7 @@ body {
 .containerWrapper {
     background: rgb(255, 255, 255);
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.8897934173669468) 0%, rgba(255, 255, 255, 0.7805497198879552) 100%);
-    padding: 78px 20px 10px;
+    padding: 5px 10px 78px;
 }
 
 .fileContainer {
@@ -33,4 +33,11 @@ body {
 
 .item-done {
     text-decoration: line-through;
+}
+
+.spendings__btn--fixed {
+    z-index: 99;
+    position: fixed;
+    bottom: 65px;
+    right: 15px;
 }

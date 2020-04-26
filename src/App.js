@@ -11,6 +11,7 @@ import { AuthContext } from './auth/Auth';
 import UserProfile from './user-profile/User-profile';
 import { ItemForm } from './item-form/Item-form';
 import AuthProtected from './auth/AuthProtected';
+import { Wallet } from './wallet/Wallet';
 
 
 
@@ -18,8 +19,8 @@ function App() {
   return (
   
       <BrowserRouter>
-        <Navigation />
-        <Container className="containerWrapper" >
+   
+        <div className="containerWrapper" >
           <AuthProtected>
             <Switch>
               <Route
@@ -39,6 +40,10 @@ function App() {
                 component={Dashboard}
               />
               <Route
+              path="/wallet"
+              component={Wallet}
+            />
+              <Route
                 path="/item-add"
                 component={ItemForm}
               />
@@ -54,7 +59,9 @@ function App() {
               <Redirect to="/" />
             </Switch>
           </AuthProtected>
-        </Container>
+        
+        </div>
+        <Navigation />
       </BrowserRouter>
 
   );
