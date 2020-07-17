@@ -1,21 +1,18 @@
 import React from 'react'
 import { Card, Label, Modal, Button } from 'semantic-ui-react'
 import SpendingForm from './SpendingForm'
-
+import CardPlaceholder from '../Placeholders/CardPlaceholder'
 
 export default ({ spendings, error }) => {
 
-
   if (error) return <h2>Error :(</h2>
-  if (!spendings) return <h2>Loading...</h2>
-  return <div>
-    <Modal size="tiny" trigger={<Button className='spendings__btn--fixed' color='orange' icon='plus' circular size='big' />}>
-      <Modal.Content>
-        <Modal.Description>
-          <SpendingForm />
-        </Modal.Description>
-      </Modal.Content>
-    </Modal>
+  if (!spendings) return <> <CardPlaceholder /><CardPlaceholder /><CardPlaceholder /><CardPlaceholder /> </>
+  if (spendings.length === 0) return <>
+    <SpendingForm />
+    <h4>No spendings yet. Add one or two.</h4>
+  </>
+  return <>
+    <SpendingForm />
     {
       spendings.map(spending => {
         return <Card.Group>
@@ -36,11 +33,7 @@ export default ({ spendings, error }) => {
               </Card.Description>
               <Label attached='bottom left'>{spending.place.slice(0, 50)}</Label>
               <Button.Group floated='right' basic compact>
-                <Modal trigger={<Button icon='edit' />}>
-                  <Modal.Content >
-                    <SpendingForm edit={spending} />
-                  </Modal.Content>
-                </Modal>
+                <SpendingForm edit={spending} />
                 <Button icon='trash' />
               </Button.Group>
             </Card.Content>
@@ -48,6 +41,5 @@ export default ({ spendings, error }) => {
         </Card.Group>
       })
     }
-
-  </div >
+  </>
 }

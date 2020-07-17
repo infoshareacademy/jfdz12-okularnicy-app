@@ -1,9 +1,11 @@
 import React from 'react'
-import { Header, Card, Button, Table, Icon } from 'semantic-ui-react'
+import { Header, Card, Button, Table, Icon, Segment, Placeholder } from 'semantic-ui-react'
 
 
 
-export default ({ wallet }) => {
+export default ({ wallet, loading }) => {
+    if (loading) return <Segment raised> <Placeholder> <Placeholder.Image rectangular />  </Placeholder> </Segment>
+
 
     return <>
         <Header content='Summary' />
@@ -46,5 +48,5 @@ export default ({ wallet }) => {
 
             </Card.Content>
         </Card>
-    </>
+  </>
 }
