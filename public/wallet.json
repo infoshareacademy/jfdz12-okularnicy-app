@@ -1,8 +1,17 @@
 {
     "mainCurrency": "PLN",
-    "budget": {
-        "PLN": 2566,
-        "EUR": 156,
-        "USD": 153.26
+    "budget": [
+        {
+        "currency": "PLN",
+        "amount": 2566
+    },
+    {
+        "currency": "EUR",
+        "amount": 321
+    },
+    {
+        "currency": "USD",
+        "amount": 136
     }
+    ]
 }

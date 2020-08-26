@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Grid, Responsive } from 'semantic-ui-react'
-import axios from 'axios'
 import firebase from "firebase";
 
 import WalletOverview from './WalletOverview'
@@ -8,6 +7,8 @@ import Spendings from './Spendings'
 
 export const Wallet = () => {
     const [wallet, setWallet] = useState([])
+    const [rates, setRates] = useState()
+    const [spent, setSpent] = useState(0)
     const [spendings, setSpendings] = useState([])
     const [loading, setloading] = useState(false)
     const [spendingsLoading, setSpendingsLoading] = useState(false)
@@ -16,29 +17,36 @@ export const Wallet = () => {
 
     const uid = firebase.auth().currentUser.uid;
     const spendingsRef = firebase.database().ref(`users/${uid}/budget/spendings/`)
+    const walletRef = firebase.database().ref(`users/${uid}/budget/wallet/`)
     useEffect(() => {
         getWallet()
-        getSpending()
+        getSpending() 
     }, [])
 
-    const getWallet = async () => {
-        try {
-            setloading(true)
-            const { data } = await axios.get('/wallet.json')
-            setWallet(data)
-            setloading(false)
-        }
-        catch (error) {
-            setError(error);
-            setloading(false)
-        }
-    }
+    const getWallet = () => {
+        setloading(true)
+        walletRef.on('value', (snapshot) => {
+            let list = snapshot.val()
+            if (list) {
+               setWallet(list)
+               setloading(false)
+               console.log(wallet)
+               
+            }else {
+                setWallet(null)
+                setloading(false)
+            }
+        })
+        
+            }
+   
 
     const getSpending = () => {
         setSpendingsLoading(true)
         spendingsRef.on('value', (snapshot) => {
             let list = snapshot.val()
             if (list) {
+                console.log("List not empty");
                 const keys = Object.keys(list);
                 const formattedData = keys.map(key => {
                     return {
@@ -46,37 +54,52 @@ export const Wallet = () => {
                         ...list[key]
                     }
                 })
-                // .sort((a, b) => a.timestamp - b.timestamp)
+                .reverse()
+                setSpent(calculateSpent(formattedData))
                 setSpendings(formattedData)
+            } else {
+                setSpendings(null)
             }
             setSpendingsLoading(false)
         })
     }
 
+    const calculateSpent = (list) => {
+       let spent = {}
+       let spentCalculated = {}
+
+       list.reduce((acc, val)=> {
+            const o = acc.filter((obj)=>{
+                return obj.currency==val.currency;
+            }).pop() || {currency:val.currency, amount:0, amountInBaseCurr: 0};
+            o.amountInBaseCurr += val.amountInBaseCurr
+            o.amount += val.amount;
+            !acc.includes(o) && acc.push(o);
+            spent[o.currency] = o.amount
+            spentCalculated[o.currency] = o.amountInBaseCurr
+            return acc;
+        },[]);
+        return {spent, spentCalculated}
+    }
+
     return <>
         <Responsive maxWidth={650}>
-            <WalletOverview wallet={wallet} loading={loading} />
-            <Spendings spendings={spendings} error={spendingError} />
+            <WalletOverview wallet={wallet} loading={loading} spent={spent}/>
+            <Spendings spendings={spendings} error={spendingError} loading={spendingsLoading} mainCurrency={wallet.mainCurrency} />
         </Responsive>
         <Responsive minWidth={651} >
-
             <Grid columns={2} >
-                <Grid.Column>
-                    <WalletOverview wallet={wallet} loading={loading} />
-                    <Spendings spendings={spendings} error={spendingError} />
+                <Grid.Column >
+                    <WalletOverview wallet={wallet} loading={loading} spent={spent} />
+                    <Spendings spendings={spendings} error={spendingError} loading={spendingsLoading} mainCurrency={wallet.mainCurrency}/>
                 </Grid.Column>
                 <Grid.Column>
-
                     <h1>Wallet graphs</h1>
                     main currency | set main currency | change
                     amount in your currency
                     !! GAPH !!
-
                         </Grid.Column>
-
             </Grid>
-
         </Responsive>
-
     </>
 }
