@@ -16,7 +16,7 @@ export default ({ wallet, loading, spent }) => {
 
     const placeholder = () => {
       return  <Placeholder >
-             <Placeholder.Line length='very short' />
+             <Placeholder.Line length='short' />
         </Placeholder>
     }
     const calculateBudget  = (wallet) => {
@@ -54,55 +54,39 @@ export default ({ wallet, loading, spent }) => {
      }
 
     return <>
-        <Header content='Summary' />
+        <Header>Wallet summary {wallet.budget && <WalletConf wallet={wallet}/>}</Header>
         <Card fluid>
             <Card.Content>
-                <Card.Header >Avaible budget: ~{ wallet.budget && rates ? calculateAvaible(): placeholder()}  {wallet.mainCurrency} </Card.Header>
-                <Card.Description >Total budget: ~{ wallet.budget && rates ? calculateBudget(wallet) : placeholder()} {wallet.mainCurrency} </Card.Description>
-
-                <Table basic='very' celled unstackable compact>
-                    <Table.Header>
-                        <Table.Row>
-                            <Table.HeaderCell>Currency</Table.HeaderCell>
-                            <Table.HeaderCell>Budget</Table.HeaderCell>
-                            <Table.HeaderCell>Spent</Table.HeaderCell>
-                            <Table.HeaderCell>Left</Table.HeaderCell>
-                        </Table.Row>
-                    </Table.Header>
+               <Table basic='very' celled unstackable compact>
                     <Table.Body>
-                        {loading &&  <Table.Row>
-                        <Table.Cell>
-                            <Placeholder>
-                             <Placeholder.Line length='short' />
-                            </Placeholder>
-                         </Table.Cell>
-                         </Table.Row>}
-                        {wallet.budget && wallet.budget.map(element => {
-                            return  <Table.Row key={element.currency}>
-                                        <Table.Cell>
-                                            {element.currency}
-                                       </Table.Cell>
-                                       <Table.Cell>
-                                            {element.amount}
-                                       </Table.Cell>
-                                       <Table.Cell>
-                                           {spent && spent.spent[element.currency]
-                                                ? `${spent.spent[element.currency]} ${element.currency === wallet.mainCurrency ? '' : `(~${parseFloat(spent.spentCalculated[element.currency]).toFixed(2)}${wallet.mainCurrency})`} ` 
-                                                : 'n/a' 
-                                                }
-                                       </Table.Cell>
-                                       <Table.Cell>
-                                           {spent && spent.spent[element.currency]
-                                                ? `${element.amount - spent.spent[element.currency]} ` 
-                                                : element.amount
-                                                }
-                                       </Table.Cell>
-                                     
-                                  </Table.Row>
-                        })}
+                        <Table.Row>
+                                <Table.Cell>
+                                    Total budget
+                                </Table.Cell>
+                                <Table.Cell width={6}>
+                                { wallet.budget && rates ? wallet.budget[0].amount : placeholder()} {wallet.mainCurrency}
+                                </Table.Cell>
+                        </Table.Row>
+                        
+                        <Table.Row>
+                                <Table.Cell>
+                                    Avaible budget
+                                </Table.Cell>
+                                <Table.Cell >
+                                    { wallet.budget && rates ? `~${calculateAvaible()}`: placeholder()}  {wallet.mainCurrency}
+                                </Table.Cell>
+                        </Table.Row>
+
+                        <Table.Row>
+                                <Table.Cell>
+                                    Total spent
+                                </Table.Cell>
+                                <Table.Cell>
+                                { wallet.budget && rates ? `~${calculateSpent()}` : placeholder()} {wallet.mainCurrency}
+                                </Table.Cell>
+                        </Table.Row>
                        </Table.Body>
-                </Table>  
-                <AddMoney wallet={wallet}/>
+                </Table>                  
             </Card.Content>
         </Card>
   </>

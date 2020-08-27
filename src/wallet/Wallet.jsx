@@ -4,6 +4,7 @@ import firebase from "firebase";
 
 import WalletOverview from './WalletOverview'
 import Spendings from './Spendings'
+import Charts from './Charts';
 
 export const Wallet = () => {
     const [wallet, setWallet] = useState([])
@@ -94,10 +95,7 @@ export const Wallet = () => {
                     <Spendings spendings={spendings} error={spendingError} loading={spendingsLoading} mainCurrency={wallet.mainCurrency}/>
                 </Grid.Column>
                 <Grid.Column>
-                    <h1>Wallet graphs</h1>
-                    main currency | set main currency | change
-                    amount in your currency
-                    !! GAPH !!
+                    {wallet.budget && spent && <Charts wallet={wallet} spent={spent}/>}
                         </Grid.Column>
             </Grid>
         </Responsive>
